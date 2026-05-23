@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Scott Smith YouTube Playbook — Team Training</title>
+<style>
+:root {
+  --bg: #0f1419;
+  --bg-2: #161c24;
+  --bg-3: #1f2730;
+  --panel: #1a2028;
+  --ink: #e8eef4;
+  --ink-2: #b7c2d0;
+  --ink-3: #7d8a99;
+  --accent: #ff0033;
+  --accent-2: #f5b945;
+  --accent-3: #4fd1c5;
+  --good: #5ee3a1;
+  --bad: #ff6b6b;
+  --line: #2a3340;
+  --code-bg: #0b1016;
+  --shadow: 0 8px 32px rgba(0,0,0,0.35);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.shell {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  background: var(--bg-2);
+  border-right: 1px solid var(--line);
+  padding: 32px 24px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar .brand {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--ink-3);
+  margin-bottom: 6px;
+}
+
+.sidebar .brand strong { color: var(--accent); }
+
+.sidebar h2 {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 28px;
+  letter-spacing: -0.3px;
+  line-height: 1.25;
+}
+
+.sidebar nav { display: flex; flex-direction: column; gap: 2px; }
+
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  color: var(--ink-2);
+  text-decoration: none;
+  font-size: 13.5px;
+  transition: all 0.15s ease;
+}
+
+.sidebar nav a:hover {
+  background: var(--bg-3);
+  color: var(--ink);
+}
+
+.sidebar nav a .num {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ink-3);
+  background: var(--bg-3);
+  border-radius: 4px;
+  padding: 2px 6px;
+  min-width: 26px;
+  text-align: center;
+}
+
+.sidebar .group-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--ink-3);
+  margin: 16px 12px 8px;
+  font-weight: 700;
+}
+
+.sidebar .footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  color: var(--ink-3);
+  line-height: 1.6;
+}
+
+/* Main */
+.main { padding: 0; }
+
+section {
+  padding: 80px 64px;
+  border-bottom: 1px solid var(--line);
+  max-width: 1100px;
+}
+
+section.hero {
+  background: linear-gradient(135deg, #1a2028 0%, #0f1419 100%);
+  padding: 96px 64px 80px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 60px;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -1.8px;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #fff 0%, #b7c2d0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h2 {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  margin-bottom: 18px;
+  line-height: 1.12;
+}
+
+h2 .num-tag {
+  display: inline-block;
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-top: 36px;
+  margin-bottom: 14px;
+  letter-spacing: -0.3px;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 24px;
+  margin-bottom: 10px;
+  color: var(--accent-2);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+p { margin-bottom: 14px; color: var(--ink-2); font-size: 16px; }
+
+.lead {
+  font-size: 19px;
+  color: var(--ink);
+  max-width: 740px;
+  line-height: 1.55;
+  margin-bottom: 28px;
+}
+
+.section-intro {
+  font-size: 17px;
+  color: var(--ink-2);
+  max-width: 780px;
+  margin-bottom: 36px;
+  line-height: 1.6;
+}
+
+ul, ol { padding-left: 22px; margin-bottom: 18px; }
+li { margin-bottom: 8px; color: var(--ink-2); }
+
+strong { color: var(--ink); font-weight: 700; }
+em { color: var(--accent-2); font-style: normal; font-weight: 600; }
+
+code {
+  font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  font-size: 13px;
+  background: var(--bg-3);
+  color: var(--accent-3);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+/* Stats */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.stat {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px;
+}
+
+.stat .num {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--accent-2);
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat .label {
+  font-size: 12px;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+/* Cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 24px;
+  transition: border-color 0.2s ease;
+}
+
+.card:hover { border-color: var(--accent-2); }
+
+.card .card-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-2);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+.card p { font-size: 14.5px; color: var(--ink-2); }
+
+/* Big step blocks */
+.step-block {
+  margin: 32px 0 48px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 12px;
+  padding: 36px 40px;
+}
+
+.step-block .step-head {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin-bottom: 6px;
+}
+
+.step-block .step-num {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.step-block .step-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+}
+
+.step-block .step-goal {
+  background: rgba(255, 0, 51, 0.06);
+  border: 1px solid rgba(255, 0, 51, 0.2);
+  border-radius: 6px;
+  padding: 12px 18px;
+  margin: 16px 0 22px;
+  font-size: 14.5px;
+  color: var(--ink);
+}
+
+.step-block .step-goal strong { color: var(--accent); }
+
+/* Prompt block */
+.prompt-block {
+  background: var(--code-bg);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent-3);
+  border-radius: 8px;
+  margin: 18px 0;
+  overflow: hidden;
+}
+
+.prompt-block .prompt-head {
+  background: var(--bg-3);
+  padding: 12px 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent-3);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.prompt-block .prompt-tool {
+  font-size: 11px;
+  background: var(--accent-3);
+  color: #0a1614;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.prompt-block pre {
+  font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  white-space: pre-wrap;
+  padding: 20px 24px;
+  overflow-x: auto;
+}
+
+/* Quote */
+.quote {
+  border-left: 3px solid var(--accent-2);
+  padding: 16px 22px;
+  margin: 22px 0;
+  background: rgba(245, 185, 69, 0.05);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--ink);
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+
+.quote .attr {
+  display: block;
+  margin-top: 10px;
+  font-style: normal;
+  color: var(--accent-2);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Tables */
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 22px 0;
+  background: var(--panel);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.tbl th, .tbl td {
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+
+.tbl th {
+  background: var(--bg-3);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--accent-2);
+}
+
+.tbl tr:last-child td { border-bottom: none; }
+
+.tbl td.first { font-weight: 700; color: var(--ink); }
+.tbl td .strong-num { color: var(--accent-2); font-weight: 700; }
+
+/* Metric diagnostic grid */
+.diag-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin: 22px 0;
+}
+
+.diag {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.diag .diag-pair {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.diag .badge {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+.badge.high { background: rgba(94, 227, 161, 0.15); color: var(--good); border: 1px solid rgba(94, 227, 161, 0.3); }
+.badge.low { background: rgba(255, 107, 107, 0.15); color: var(--bad); border: 1px solid rgba(255, 107, 107, 0.3); }
+
+.diag h4 { margin-top: 0; color: var(--ink); font-size: 14px; }
+.diag .fix { font-size: 13.5px; color: var(--ink-2); margin-top: 8px; }
+.diag .fix strong { color: var(--accent-2); }
+
+/* Checklist */
+.checklist {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 24px 28px;
+  margin: 18px 0;
+}
+
+.checklist h4 { margin-top: 0; }
+
+.checklist ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.checklist ul li {
+  padding-left: 32px;
+  position: relative;
+  margin-bottom: 10px;
+  color: var(--ink-2);
+  font-size: 14.5px;
+}
+
+.checklist ul li:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--ink-3);
+  border-radius: 4px;
+}
+
+/* Two-col */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 22px 0;
+}
+
+/* Role card */
+.role {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 26px;
+  margin: 14px 0;
+}
+
+.role h3 {
+  margin-top: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.role h3 .role-num {
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.role .meta-row {
+  font-size: 13px;
+  color: var(--ink-3);
+  margin: 4px 0;
+}
+
+.role .meta-row strong { color: var(--ink-2); font-weight: 600; }
+
+.role h4 { font-size: 12px; margin-top: 18px; margin-bottom: 8px; }
+
+/* Tools tier */
+.tier {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.tier .head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+}
+
+.tier .head h3 { margin: 0; font-size: 19px; }
+.tier .price {
+  font-size: 14px;
+  color: var(--accent-2);
+  font-weight: 700;
+}
+
+/* Insight callouts */
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+  margin: 24px 0;
+}
+
+.insight {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent-2);
+  border-radius: 8px;
+  padding: 20px 22px;
+}
+
+.insight .n {
+  font-size: 11px;
+  color: var(--accent-2);
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.insight p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+/* Weekly rhythm */
+.day-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.day {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 20px 18px;
+}
+
+.day h4 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 11px;
+  color: var(--accent);
+}
+
+.day .day-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 14px;
+  letter-spacing: -0.3px;
+}
+
+.day ul { padding-left: 16px; margin: 0; }
+.day li { font-size: 12.5px; color: var(--ink-2); line-height: 1.5; margin-bottom: 6px; }
+
+/* Footer */
+.footer-section {
+  padding: 60px 64px;
+  background: var(--bg-2);
+  text-align: center;
+  border-bottom: none;
+}
+
+.footer-section p { font-size: 13px; color: var(--ink-3); }
+
+@media (max-width: 900px) {
+  .shell { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; }
+  section { padding: 56px 28px; }
+  section.hero { padding: 64px 28px; }
+  h1 { font-size: 38px; }
+  h2 { font-size: 26px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .two-col, .diag-grid { grid-template-columns: 1fr; }
+  .day-grid { grid-template-columns: 1fr 1fr; }
+  .step-block { padding: 24px 22px; }
+  .step-block .step-title { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">YOUTUBE GROWTH · <strong>TEAM TRAINING</strong></div>
+    <h2>The Scott Smith Playbook</h2>
+    <nav>
+      <div class="group-label">Foundation</div>
+      <a href="#intro"><span class="num">01</span> What This Actually Is</a>
+      <a href="#economics"><span class="num">02</span> The Economics</a>
+
+      <div class="group-label">The 5-Step System</div>
+      <a href="#step1"><span class="num">03</span> Step 1: Niche Selection</a>
+      <a href="#step2"><span class="num">04</span> Step 2: Video Ideation</a>
+      <a href="#step3"><span class="num">05</span> Step 3: Script Pack</a>
+      <a href="#step4"><span class="num">06</span> Step 4: First Views</a>
+      <a href="#step5"><span class="num">07</span> Step 5: Monetize &amp; Scale</a>
+
+      <div class="group-label">Execution</div>
+      <a href="#prompts"><span class="num">08</span> Prompt Library</a>
+      <a href="#roles"><span class="num">09</span> Team Roles</a>
+      <a href="#rhythm"><span class="num">10</span> Weekly Rhythm</a>
+      <a href="#tools"><span class="num">11</span> Tool Stack</a>
+
+      <div class="group-label">Quality</div>
+      <a href="#metrics"><span class="num">12</span> Metrics &amp; Diagnostics</a>
+      <a href="#checklists"><span class="num">13</span> Quality Gates</a>
+      <a href="#decisions"><span class="num">14</span> Double Down vs. Cut</a>
+
+      <div class="group-label">Mindset</div>
+      <a href="#insights"><span class="num">15</span> Scott's 7 Insights</a>
+    </nav>
+    <div class="footer">
+      Source: Scott Smith live workshop, ~57 min recording (April 2026).<br>
+      Team training playbook — internal use.
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- HERO -->
+    <section class="hero" id="intro">
+      <span class="eyebrow">Faceless AI YouTube Channels · 5-Step System</span>
+      <h1>Grow a YouTube channel without showing up on camera.</h1>
+      <p class="lead">
+        Scott Smith runs 22+ faceless, long-form YouTube channels generating $30K–$40K per month <em>each</em> at scale. No camera. No voiceover from him. AI does 80% of the pre-production. A small offshore team produces every video for ~$75. This playbook is the entire 5-step system, end to end.
+      </p>
+      <p class="lead" style="color: var(--ink-2); font-size: 16px;">
+        Read top to bottom. Each step builds on the last. By the end you'll have the niche-selection logic, the four AI prompts that drive ideation, the Script Bible workflow, the metrics that matter, the team roles, and the tools — everything needed to run this on any channel in any high-RPM niche.
+      </p>
+
+      <div class="stats">
+        <div class="stat"><div class="num">22+</div><div class="label">Channels Run</div></div>
+        <div class="stat"><div class="num">$12.09</div><div class="label">RPM (Aviation Channel)</div></div>
+        <div class="stat"><div class="num">$75</div><div class="label">Cost Per Video</div></div>
+        <div class="stat"><div class="num">$38K</div><div class="label">Top 3-Channel Month</div></div>
+      </div>
+    </section>
+
+    <!-- 01 WHAT THIS IS -->
+    <section>
+      <h2><span class="num-tag">Section 01</span><br>What this actually is.</h2>
+      <p class="section-intro">
+        Faceless long-form YouTube. No on-camera presence. Voiceover plus B-roll editing. Targeted at <em>high-RPM niches</em> — topics where advertisers pay $7–$12+ per 1,000 views, like aviation, finance, legal, medical, and tech-adjacent verticals. The system is modular, AI-augmented, and designed to scale across many channels in parallel.
+      </p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">The format</div>
+          <h3>Long-form only. 10–15 minutes.</h3>
+          <p>Shorts do not pay meaningfully. Long-form videos compound watch hours, attract more ad slots per view, and unlock real revenue.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">The labor split</div>
+          <h3>AI handles ~80%. Humans handle the rest.</h3>
+          <p>Claude and Gemini handle data analysis, topic research, Script Bible generation, outlines, and analytics. A human writes the final script. A small team produces the video.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">The economics</div>
+          <h3>$75 in, $1,000+ potential out.</h3>
+          <p>Per-video production cost: ~$75 (writer + VO + editor + thumbnail). One winner can return $1K+ over its lifetime. The portfolio carries the math.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">The portfolio principle</div>
+          <h3>3 of 22 videos drive 90% of revenue.</h3>
+          <p>Most videos flop. Plan for it. The winners pay for everything. Same as venture capital, same as stock portfolios.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 ECONOMICS -->
+    <section id="economics">
+      <h2><span class="num-tag">Section 02</span><br>The economics — why this works.</h2>
+      <p class="section-intro">
+        Channel selection locks in your revenue ceiling from Day 1. The math is unforgiving: same effort, totally different output depending on niche.
+      </p>
+
+      <table class="tbl">
+        <thead>
+          <tr><th>Niche Type</th><th>RPM</th><th>100K Views =</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="first">Aviation, finance, legal, medical</td><td><span class="strong-num">$10–$12+</span></td><td><span class="strong-num">$1,000–$1,200</span></td><td>"Goldmine niches" — advertisers compete</td></tr>
+          <tr><td class="first">Tech, business, real estate</td><td><span class="strong-num">$7–$10</span></td><td><span class="strong-num">$700–$1,000</span></td><td>Strong floor, healthy growth</td></tr>
+          <tr><td class="first">General entertainment</td><td>$2–$4</td><td>$200–$400</td><td>Tough math at scale</td></tr>
+          <tr><td class="first">Gaming, kids, music reactions</td><td>$1–$2</td><td>$100–$200</td><td>Avoid unless special edge</td></tr>
+        </tbody>
+      </table>
+
+      <h3>The per-channel investment math</h3>
+      <p>One channel, four months, two videos per week ≈ <strong>32 videos × $75 = ~$2,400 production spend</strong>. When the channel hits monetization and gets a winner, a single channel can produce <strong>$30K+/month at maturity</strong>. Scott's three-channel snapshot:</p>
+
+      <table class="tbl">
+        <thead>
+          <tr><th>Channel</th><th>Monthly Revenue</th><th>Views</th><th>RPM</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="first">Channel A (aviation)</td><td><span class="strong-num">$16,694</span></td><td>2.2M</td><td>$7.59</td></tr>
+          <tr><td class="first">Channel B</td><td><span class="strong-num">$15,129</span></td><td>1.8M</td><td>$8.37</td></tr>
+          <tr><td class="first">Channel C</td><td><span class="strong-num">$6,439</span></td><td>744K</td><td>$8.65</td></tr>
+          <tr><td class="first"><strong>Total (one month)</strong></td><td><strong>$38,262</strong></td><td>4.7M</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- STEP 1 -->
+    <section id="step1">
+      <h2><span class="num-tag">Section 03 · STEP 1 of 5</span><br>Niche Selection</h2>
+
+      <div class="step-block">
+        <div class="step-head">
+          <div class="step-num">Step 01</div>
+          <div class="step-title">Pick a niche where the math works on Day 1.</div>
+        </div>
+        <div class="step-goal"><strong>Goal:</strong> Land in a niche that pays $7+ RPM, has rising or evergreen demand, and has a real gap in the competitive set.</div>
+
+        <h3>The three non-negotiables</h3>
+        <ul>
+          <li><strong>High RPM</strong> — minimum $7 per 1,000 views. Top niches pay $10–$12+. Scott's aviation channel: $12.09 RPM.</li>
+          <li><strong>Rising or evergreen demand</strong> — no dying fads. Use Google Trends to confirm.</li>
+          <li><strong>A gap in the market</strong> — demand exists but competition is thin. Fewer than ~50 mature English channels in the space.</li>
+        </ul>
+
+        <h3>The RPM reality</h3>
+        <p>Niche choice compounds forever. A $12 RPM niche earns 6× what a $2 RPM niche earns for the exact same view count. Choose wrong, and no amount of execution fixes it.</p>
+
+        <h3>The discovery workflow</h3>
+        <ol>
+          <li>Use Claude + Gemini to brainstorm 20+ high-RPM candidate niches</li>
+          <li>Validate with Google Trends — 12 months, rising or stable</li>
+          <li>Check competitive density on YouTube — count mature channels, their size, their recency</li>
+          <li>Shortlist niches with <strong>rising trend + thin competition</strong></li>
+          <li>Run a deep-dive validation on the top 3 (Prompt 1B in the library)</li>
+        </ol>
+
+        <div class="quote">
+          "It's like an investment portfolio: 10% of the stocks make up 90% of the value. Same thing on YouTube. You're not guessing — you're picking a niche where the math works, then running a portfolio."
+          <span class="attr">— Scott Smith</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 2 -->
+    <section id="step2">
+      <h2><span class="num-tag">Section 04 · STEP 2 of 5</span><br>Video Ideation (The 4-Prompt Core Loop)</h2>
+
+      <div class="step-block">
+        <div class="step-head">
+          <div class="step-num">Step 02</div>
+          <div class="step-title">Generate validated, data-backed video topics.</div>
+        </div>
+        <div class="step-goal"><strong>Goal:</strong> Produce a ranked list of 5 video topics with evidence — no guessing, no wasting $75 on dud videos.</div>
+
+        <h3>The full sequence</h3>
+        <ol>
+          <li><strong>Claude — Channel Data Extraction.</strong> Screenshot the top competitor's Videos tab (40 most recent uploads). Paste into Claude. Get back a clean table: title, view count, upload date.</li>
+          <li><strong>Claude — Title Pattern Analysis.</strong> Feed Claude the table. Get back: top-performing title patterns, what's failing, topic theme clusters, hook word frequency, upload-timing signals, and the gaps a new entrant can exploit.</li>
+          <li><strong>Claude — Build the Gemini Research Prompt.</strong> Ask Claude to write a sharp, niche-specific prompt for Gemini Deep Research. Claude returns a tailored 150–300 word prompt.</li>
+          <li><strong>Gemini Deep Research.</strong> Paste Claude's prompt. Gemini researches the entire niche and returns a comprehensive doc — trending topics, recent angles, surfacing news, calendar events.</li>
+          <li><strong>Claude — Topic Ranking.</strong> Feed Gemini's research back to Claude. Get back 5 ranked topic recommendations with title variations, difficulty scores, evergreen vs. timely classification, and estimated view ceilings.</li>
+        </ol>
+
+        <h3>The critical verification step — Google Trends</h3>
+        <div class="step-goal" style="background: rgba(245, 185, 69, 0.06); border-color: rgba(245, 185, 69, 0.2);">
+          <strong>Do not skip this.</strong> For each of the 5 Claude-ranked topics, validate manually in Google Trends. Filter: <code>United States</code> · <code>Past 12 months</code> · <code>YouTube Search</code>. Classify rising / stable / declining. Kill anything flat or declining unless it's truly evergreen. Compare topics side-by-side in the "Compare" feature.
+        </div>
+
+        <p><strong>Why this matters in practice:</strong> In Scott's aviation example, B21 Raider and F15E both trended up (keep). AIAA Aviation was flat — would have been $75 of production spend for $0 of return. Trends caught it before the script was even written.</p>
+
+        <div class="quote">
+          "AI is a tool. It's not a replacement for your brain. Verify the data. Verify the research. The people who let AI do everything end up with channels that make no money."
+          <span class="attr">— Scott Smith</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 3 -->
+    <section id="step3">
+      <h2><span class="num-tag">Section 05 · STEP 3 of 5</span><br>The Script Pack</h2>
+
+      <div class="step-block">
+        <div class="step-head">
+          <div class="step-num">Step 03</div>
+          <div class="step-title">Build the Script Bible, generate outlines, hand to a human writer.</div>
+        </div>
+        <div class="step-goal"><strong>Goal:</strong> Deliver a research-packed, voiceover-ready final script — without writing it yourself.</div>
+
+        <h3>3a. Build the Script Bible</h3>
+        <ol>
+          <li>On the competitor channel, open 10 top-performing videos</li>
+          <li>For each: scroll down → <strong>Show Transcript</strong> → <strong>Copy Transcript</strong> (or pull at scale with vidIQ)</li>
+          <li>Paste all 10 transcripts into a single document, clearly delimited with title + view count</li>
+          <li>Send to Claude with the Script Bible prompt (see Prompt 3-1)</li>
+          <li>Claude returns the <strong>Script Bible</strong> — the template of how this niche's winning scripts actually work: hook patterns, narrative arc, research integration, tonal register, recurring phrases, tension/payoff patterns, CTA placement, retention engineering</li>
+        </ol>
+
+        <h3>3b. Generate the outline (NOT the full script)</h3>
+        <ol>
+          <li>Pick 2–3 validated titles from Step 2</li>
+          <li>Send to Gemini: <code>Script Bible + Title</code> with the outline prompt (Prompt 3-2)</li>
+          <li>Gemini returns a detailed outline per title — hook, section beats, research to weave in, transitions, CTA placement, runtime estimate, writer notes</li>
+        </ol>
+
+        <h3>3c. Hand off to a human writer</h3>
+        <p>Package: <code>Script Bible + Outline + Gemini research notes</code> = <strong>The Script Pack</strong>. The human writer takes the Pack and produces the final script.</p>
+
+        <div class="quote">
+          "If you have Claude or Gemini write the full script, you're wasting your time. Quality is garbage. Use AI for the bible and the outline. Use a human for the final."
+          <span class="attr">— Scott Smith</span>
+        </div>
+
+        <p><strong>Writer cost:</strong> $25–$75 per script depending on tier. Hire 3–4 writers initially for redundancy. <strong>Output:</strong> 10–15 minute video script (≈ 1,500–2,200 words at voiceover pace).</p>
+
+        <h3>3d. Final delivery package</h3>
+        <p>The script goes to three people:</p>
+        <ul>
+          <li><strong>Voiceover artist</strong> — records the audio (or use ElevenLabs AI VO)</li>
+          <li><strong>Video editor</strong> — cuts the final video</li>
+          <li><strong>Thumbnail designer</strong> — produces 2–3 thumbnail variants</li>
+        </ul>
+
+        <div class="quote">
+          "You didn't write a word, you didn't edit a frame. You got the video idea, you got the script pack, you handed it to the team, they handed you back a video."
+          <span class="attr">— Scott Smith</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 4 -->
+    <section id="step4">
+      <h2><span class="num-tag">Section 06 · STEP 4 of 5</span><br>Getting Your First Views</h2>
+
+      <div class="step-block">
+        <div class="step-head">
+          <div class="step-num">Step 04</div>
+          <div class="step-title">Get a video past 1,000 views. That's the signal you're "in the game."</div>
+        </div>
+        <div class="step-goal"><strong>Goal:</strong> Two things simultaneously — collect data on what's working, and hit the algorithmic threshold that unlocks broader distribution.</div>
+
+        <h3>The two metrics that actually matter</h3>
+        <table class="tbl">
+          <thead><tr><th>Metric</th><th>Target</th><th>What it means</th></tr></thead>
+          <tbody>
+            <tr><td class="first">CTR (Click-Through Rate)</td><td><span class="strong-num">10%+</span></td><td>Of people who see your thumbnail, 10% click</td></tr>
+            <tr><td class="first">APV (Average Percentage Viewed)</td><td><span class="strong-num">30%+</span></td><td>Viewers watch at least 30% of the video</td></tr>
+          </tbody>
+        </table>
+
+        <h3>The reality you have to accept</h3>
+        <ul>
+          <li><strong>Most early videos flop.</strong> That's normal. The algorithm is testing you.</li>
+          <li><strong>80% of your videos will get under 1,000 views.</strong> Plan for it. Don't panic.</li>
+          <li><strong>3 of every 22 videos will drive 90% of the revenue.</strong> The portfolio principle.</li>
+          <li><strong>The snowball effect is real.</strong> When ONE video pops, YouTube sends ALL your videos to more people. One hit lifts the whole channel.</li>
+        </ul>
+
+        <h3>Publishing cadence</h3>
+        <p><strong>Minimum 2 videos per week.</strong> Below that, the algorithm doesn't have enough data to learn what you're about.</p>
+
+        <h3>AI as your optimization partner (after upload)</h3>
+        <p>Use Claude to:</p>
+        <ul>
+          <li>Generate title variations for A/B mental testing</li>
+          <li>Analyze your hooks ("paste the script — why would someone click away in the first 30 seconds?")</li>
+          <li>Interpret your analytics (paste screenshots from YT Analytics → ask for takeaways)</li>
+          <li>SEO-optimize descriptions and tags</li>
+        </ul>
+
+        <div class="quote">
+          "If it's not working, something YOU'RE doing is wrong. Check your data. Your analytics tell you the answer. Don't abandon the niche — abandon the assumption."
+          <span class="attr">— Scott Smith</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 5 -->
+    <section id="step5">
+      <h2><span class="num-tag">Section 07 · STEP 5 of 5</span><br>Monetize &amp; Scale</h2>
+
+      <div class="step-block">
+        <div class="step-head">
+          <div class="step-num">Step 05</div>
+          <div class="step-title">Get paid. Then duplicate the system on channel 2, 3, 4…</div>
+        </div>
+        <div class="step-goal"><strong>Goal:</strong> Hit YouTube Partner Program (YPP) thresholds → apply → start earning ad revenue → scale into a portfolio.</div>
+
+        <h3>YPP requirements</h3>
+        <ul>
+          <li><strong>1,000 subscribers</strong></li>
+          <li><strong>4,000 watch hours</strong> in the past 12 months (~35–40K views at 10–15 min length)</li>
+        </ul>
+        <p>Hit both → apply → wait for review → monetized.</p>
+
+        <h3>Pre-monetization revenue (Scott's pro tip)</h3>
+        <p>You can earn <em>before</em> YPP via:</p>
+        <ul>
+          <li><strong>Brand deals</strong> — sponsorships baked into the video</li>
+          <li><strong>Affiliate marketing</strong> — product links in the description</li>
+        </ul>
+        <p>This matters: you can generate cash flow before the algorithm starts paying you.</p>
+
+        <h3>Revenue maximization levers</h3>
+        <ol>
+          <li><strong>High RPM niche</strong> — locked in at Step 1, non-negotiable</li>
+          <li><strong>High APV</strong> — longer watch = more ads shown per view = higher revenue per view</li>
+          <li><strong>Long-form only</strong> — Shorts do not pay meaningfully. 10–15 min is the sweet spot.</li>
+          <li><strong>Multiple channels</strong> — the scale play</li>
+        </ol>
+
+        <h3>The tags hack most people ignore</h3>
+        <p>Two surfaces in YouTube Studio, both undervalued:</p>
+        <ul>
+          <li><strong>Video tags</strong> (inside YouTube Studio → scroll down) — help YouTube classify your content topically and surface it in search. Example for celebrity niche: <code>celebrity news</code>, <code>Hollywood drama</code>, <code>pop culture</code>.</li>
+          <li><strong>Description hashtags</strong> (3–5 at the top of your description) — make videos discoverable via clickable hashtag links. Example: <code>#celebrities #HollywoodDrama #PopCulture</code>.</li>
+        </ul>
+        <p><strong>The vidIQ hack:</strong> Install the vidIQ Chrome extension. When viewing any competitor's video, the right sidebar shows the <em>exact tags they're using</em>. Copy and adapt for your videos in the same niche.</p>
+
+        <h3>Scaling the portfolio</h3>
+        <p>Channel 1 → prove the system → hit $30K+ potential. Channel 2 → <em>easier</em>, same team, same process, no learning curve. Channel 3, 4, 5… → compounding income streams using the same SOPs, prompt library, and analytics dashboard. Only the niche and channel identity change.</p>
+      </div>
+    </section>
+
+    <!-- 08 PROMPT LIBRARY -->
+    <section id="prompts">
+      <h2><span class="num-tag">Section 08</span><br>The Prompt Library</h2>
+      <p class="section-intro">
+        Every prompt below is copy-paste ready. Square brackets are fill-in-the-blank. Run them in order. Store master versions in your team's Notion or workspace doc and version every meaningful rewrite.
+      </p>
+
+      <h3>Step 1 — Niche Selection</h3>
+
+      <div class="prompt-block">
+        <div class="prompt-head">Prompt 1A — High-RPM Niche Brainstorm <span class="prompt-tool">Claude</span></div>
+        <pre>I'm planning to build a faceless long-form YouTube channel. The goal is to land in a niche with:
+- Minimum $7 RPM (US audience, long-form video)
+- Rising or stable demand (not declining)
+- Fewer than 50 mature English-language channels in the space
+- Evergreen appeal (still valuable in 3–5 years)
+- Not overly reliant on the operator being on-camera
+
+Give me 20 niche candidates ranked by your estimate of RPM × demand × gap. For each, give:
+- Niche name + 2-line description
+- Estimated RPM range (low, likely, high)
+- Top 3 competitor channels in that niche, with rough subscriber count
+- 2 reasons this niche has a gap
+- 2 risks or concerns
+
+After the list, tell me which 3 you'd prioritize investigating further and why.</pre>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">Prompt 1B — Niche Deep-Dive Validation <span class="prompt-tool">Claude</span></div>
+        <pre>I'm evaluating [NICHE NAME] as a faceless long-form YouTube channel opportunity.
+
+Do a deep analysis covering:
+1. Audience profile (demographics, geography, income proxy, buying intent)
+2. Advertiser categories that target this audience and typical CPMs
+3. Top 10 channels in this niche with subscriber counts and estimated monthly revenue
+4. Content formats that work in this niche (interview, explainer, ranking, news, etc.)
+5. Content formats that fail in this niche
+6. Seasonal or cyclical patterns
+7. Overlapping adjacent niches we could expand into later
+8. Red flags (copyright risks, advertiser-unfriendly topics, demonetization risks, bot-farmed channels)
+
+End with: "GO / CONSIDER / SKIP" with a 2-sentence verdict.</pre>
+      </div>
+
+      <h3>Step 2 — Video Ideation (The 4-Prompt Loop)</h3>
+
+      <div class="prompt-block">
+        <div class="prompt-head">Prompt 2-1 — Channel Data Extraction <span class="prompt-tool">Claude + Screenshot</span></div>
+        <pre>I've attached a screenshot of the [NICHE] top channel's Videos tab showing the 40 most recent uploads.
+
+Create a clean markdown table of the 40 most recent videos including:
+| # | Video Title | View Count | Upload Date |
+
+Extract every row visible in the screenshots (I'll attach more if needed). Preserve exact titles including emojis and punctuation. Express view counts as numbers (e.g., 1,200,000 not "1.2M").
+
+If any data is unclear or missing in the screenshot, flag it with [UNCLEAR] rather than guessing.</pre>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">Prompt 2-2 — Title Pattern Analysis <span class="prompt-tool">Claude</span></div>
+        <pre>Below is a table of the 40 most recent videos from a top channel in the [NICHE] niche, including titles, view counts, and upload dates.
+
+Do a deep analysis and provide:
+
+1. Top-performing title patterns — videos with view counts at least 2× the channel median. What recurring structures, words, hooks, number usage, emotional triggers, curiosity gaps do they share?
+
+2. Underperforming title patterns — videos at or below 0.5× the median. What's failing? Why?
+
+3. Topic themes — cluster the 40 videos into 5–7 topic themes. Which themes perform best and which flop?
+
+4. Hook word frequency — list the 15 most frequent meaningful words/phrases in titles and their correlation with view count.
+
+5. Upload timing patterns — is there any day-of-week or recency signal in the performance?
+
+6. Final takeaways — 5 rules this channel is clearly following, and 3 gaps they're leaving on the table that a new entrant could exploit.
+
+Be specific and data-backed. No generic advice.
+
+[PASTE CHANNEL DATA TABLE HERE]</pre>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">Prompt 2-3 — Build the Gemini Research Prompt <span class="prompt-tool">Claude</span></div>
+        <pre>Based on the niche analysis we just did on [NICHE NAME], write me a sharp, specific research prompt I can paste into Gemini Deep Research. The goal is to surface:
+- The 15–20 most relevant trending topics in this niche right now (last 90 days)
+- Any news, releases, events, or cultural moments that could drive topical videos
+- Recent breakthroughs, controversies, or debates in the space
+- Upcoming calendar events in the next 60 days worth content-ing around
+- 5 angles or perspectives on the niche that aren't yet saturated on YouTube
+
+The prompt should be 150–300 words, specific to [NICHE NAME], and explicitly request source citations. Do NOT include generic language that would work for any niche.
+
+Return only the prompt, nothing else — it'll go directly into Gemini.</pre>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">→ Run in Gemini Deep Research <span class="prompt-tool">Gemini</span></div>
+        <pre>Paste the prompt Claude just generated into Gemini Deep Research. Let it run end-to-end. Return with the full output.</pre>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">Prompt 2-4 — Topic Ranking <span class="prompt-tool">Claude</span></div>
+        <pre>Below is Gemini Deep Research's output on the [NICHE NAME] niche. Our goal: identify the 5 video topics most likely to perform on YouTube for a new channel in this space.
+
+Analyze all of this research and give me 5 ranked topic recommendations. For each:
+
+1. Topic — the working title framing
+2. Why it wins — specific signal in the research that points to demand
+3. Target search intent — what viewer is looking for
+4. Difficulty — is this saturated, under-covered, or wide-open?
+5. Estimated view ceiling — based on comparable videos in the research
+6. Evergreen vs. timely — will this age well or is it a 90-day window?
+7. Suggested 3 title variations — different hooks for A/B consideration
+
+Rank #1 through #5 with #1 being highest priority. End with a note on which 2 we should prioritize publishing FIRST based on urgency vs. quality.
+
+[PASTE GEMINI RESEARCH HERE]</pre>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">→ Google Trends Verification <span class="prompt-tool">Human Workflow</span></div>
+        <pre>For each of the 5 topics Claude ranked:
+1. Go to trends.google.com
+2. Search the topic
+3. Filter: United States · Past 12 months · YouTube Search
+4. Classify: rising / stable / declining
+5. Compare all 5 side-by-side using Google Trends' "Compare" feature
+6. KILL any topic that's flat or declining (unless truly evergreen)
+7. Screenshot results for the Topic Brief</pre>
+      </div>
+
+      <h3>Step 3 — Script Creation</h3>
+
+      <div class="prompt-block">
+        <div class="prompt-head">Prompt 3-1 — Script Bible Generation <span class="prompt-tool">Claude</span></div>
+        <pre>Below are 10 full transcripts from top-performing videos in the [NICHE NAME] niche, sourced from the competitor channel [CHANNEL NAME]. Each video's view count is listed with its transcript.
+
+Do a deep, structural analysis and produce a Script Bible — the template of how this niche's winning videos actually work. Cover:
+
+1. Hook structure — the first 30 seconds across all 10 videos. What's the pattern? (Pattern-interrupt, question, bold claim, time-sensitive urgency, etc.)
+
+2. Narrative arc — how does the script progress from hook → body → CTA? Break into typical sections with timing estimates.
+
+3. Research integration — how is data, facts, quotes woven in? What % of script is narration vs. evidence?
+
+4. Tonal register — sentence length, reading level, emotional intensity, authority level. Match to audience.
+
+5. Recurring phrases and transitions — the exact verbal glue this channel uses between sections.
+
+6. Tension + payoff patterns — how does the script keep the viewer from clicking away? Look for open loops, delayed answers, callbacks.
+
+7. CTA patterns — how do they handle "subscribe," "next video," or sponsor integrations? Where in the script?
+
+8. Retention engineering — specific tactics visible in the writing that target retention (drop-offs, re-hooks, visual cues the writer is cueing).
+
+Output the Script Bible as a reusable template that a human script writer could follow for ANY new topic in this niche.
+
+[PASTE 10 TRANSCRIPTS HERE, clearly delimited with "--- VIDEO N: Title (View Count) ---"]</pre>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">Prompt 3-2 — Script Outline from Bible + Title <span class="prompt-tool">Gemini</span></div>
+        <pre>I have a Script Bible for the [NICHE NAME] niche (pasted below). I need you to write a detailed script OUTLINE for the following video title:
+
+Title: [TITLE HERE]
+
+Do NOT write the full script. Produce an outline only. The outline should include:
+
+1. Hook (first 30 seconds) — specific opening lines + visual cue notes. Match the Script Bible's hook pattern.
+
+2. Section-by-section beats — each section with: section heading, word count target, key points to cover, research/facts to weave in, tension-payoff moment.
+
+3. Research to surface — identify 8–15 specific facts, data points, quotes, or events from your research that MUST be in this script. Cite sources.
+
+4. Transitions — the verbal glue between sections, following the Bible's tone.
+
+5. CTA placement — where and how, matching the Bible's pattern.
+
+6. Estimated runtime — based on word count assuming 150 wpm voiceover pace.
+
+7. Writer's notes — 3–5 bullet points flagging any tricky spots, potential copyright issues, or moments where voiceover delivery matters.
+
+The goal: a script writer should be able to take this outline and produce a publish-ready script in 2–4 hours without additional research.
+
+[PASTE SCRIPT BIBLE HERE]</pre>
+      </div>
+
+      <h3>Step 4 — Optimization &amp; Analytics</h3>
+
+      <div class="prompt-block">
+        <div class="prompt-head">Prompt 4-1 — CTR Diagnostic <span class="prompt-tool">Claude</span></div>
+        <pre>One of our videos on [CHANNEL NAME] is underperforming. Here are the details:
+
+- Video title: [TITLE]
+- Current thumbnail: [DESCRIPTION or attach image]
+- Topic: [TOPIC]
+- Target audience: [AUDIENCE PROFILE]
+- After 48 hours:
+  - Impressions: [N]
+  - CTR: [N]%
+  - APV: [N]%
+  - Audience retention graph: [PASTE OR DESCRIBE]
+
+Analyze and give me:
+
+1. Diagnosis — Is this primarily a CTR problem, APV problem, or both? What's the specific failure mode?
+
+2. Hypotheses — 3 specific reasons this underperformed. Rank by likelihood.
+
+3. Fixes — For each hypothesis, what's the specific fix? (New title? New thumbnail? Script restructure for the next video in this cluster?)
+
+4. 3 new title variations and 2 new thumbnail concepts to test
+
+5. Decision call — is this video worth republishing with a new thumbnail/title, or abandon and move on?
+
+Be specific. No generic "improve the hook" advice.</pre>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">Prompt 4-2 — Hook Analysis <span class="prompt-tool">Claude</span></div>
+        <pre>I'll paste a script below. Pretend you're a typical viewer in the [AUDIENCE PROFILE] demographic.
+
+For the first 60 seconds of the script:
+1. Identify each moment a viewer would be tempted to click away. Quote the exact line and explain why.
+2. Rate the hook strength on a 1–10 scale with specific reasoning.
+3. Rewrite the first 30 seconds in 3 variations, each testing a different hook approach (curiosity, urgency, contrarian take).
+4. Flag any confusing, slow, or low-stakes moments in the opening that would cause drop-off.
+
+[PASTE SCRIPT HERE]</pre>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">Prompt 4-3 — Weekly Channel Analytics Review <span class="prompt-tool">Claude</span></div>
+        <pre>Below is a screenshot / data export of this week's analytics for [CHANNEL NAME].
+
+Do a full analytical review and return:
+
+1. Performance summary — the 3 most important numbers and what they mean
+2. Winners and losers — which videos overperformed and which flopped, with view counts + key metrics
+3. Pattern recognition — any emerging patterns in what's working (topics, title structures, thumbnail styles, runtime)
+4. Red flags — anything concerning (CTR decline, audience retention drop, subscriber churn, traffic source shifts)
+5. Opportunities — based on the data, what should we double down on next week?
+6. Recommended actions — 5 specific, actionable decisions for the next 7 days. Format: "Do X because Y."
+
+Write the report as a memo — clear, confident, not hedged. 400–600 words.
+
+[PASTE ANALYTICS DATA HERE]</pre>
+      </div>
+
+      <h3>Step 5 — Monetization &amp; Scale</h3>
+
+      <div class="prompt-block">
+        <div class="prompt-head">Prompt 5-1 — YPP Application Readiness Check <span class="prompt-tool">Claude</span></div>
+        <pre>Our channel [CHANNEL NAME] is approaching YouTube Partner Program eligibility. Current stats:
+- Subscribers: [N]
+- Watch hours (last 12 months): [N]
+- Total videos: [N]
+- Channel age: [N months]
+
+Give me a YPP readiness audit:
+1. Technical eligibility — are we meeting thresholds? When will we if not yet?
+2. Content policy audit — based on our content themes, are there any demonetization risks? Any adult themes, copyright issues, "limited ads" risks?
+3. Community guidelines check — anything that could block approval?
+4. Channel setup audit — is the about page, banner, channel trailer all optimized?
+5. Pre-application checklist — 10 items to complete before clicking "apply"
+
+Be specific about what we need to do before applying so we don't get rejected.</pre>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">Prompt 5-2 — Channel #2 Niche Evaluation <span class="prompt-tool">Claude</span></div>
+        <pre>We have an established channel at [CHANNEL NAME] in the [NICHE] niche, now making $[N]/month.
+
+We're ready to launch a second channel. Our team is experienced with [EXISTING NICHE] workflows. Evaluate the following candidate niches for our second channel based on:
+
+- Learning curve leverage — can we reuse our existing skills or do we have to start over?
+- Audience overlap — does it tap similar audiences we could cross-promote to?
+- Team capacity — can our existing team handle this without doubling cost?
+- RPM + scale potential
+- Risk diversification — does this de-risk our portfolio vs. doubling down?
+
+Candidate niches:
+1. [NICHE A]
+2. [NICHE B]
+3. [NICHE C]
+
+Rank them and recommend which to launch, which to hold, which to skip. Give a 90-day launch plan for the recommended one.</pre>
+      </div>
+    </section>
+
+    <!-- 09 ROLES -->
+    <section id="roles">
+      <h2><span class="num-tag">Section 09</span><br>Team Roles</h2>
+      <p class="section-intro">
+        The system is modular — each step has a clean hand-off, so ownership splits cleanly across the team without losing continuity. These are the 8 roles. One person can wear multiple hats at small scale; at scale you specialize.
+      </p>
+
+      <div class="role">
+        <h3><span class="role-num">ROLE 01</span>Channel Strategist (Account Lead)</h3>
+        <div class="meta-row"><strong>Capacity:</strong> 3–5 channels per strategist at steady state</div>
+        <h4>Owns</h4>
+        <ul>
+          <li>Niche strategy + channel positioning</li>
+          <li>Weekly reporting + monthly strategy call</li>
+          <li>Go/no-go on topic lists</li>
+          <li>Escalation point when metrics underperform</li>
+        </ul>
+        <h4>Daily Work</h4>
+        <ul>
+          <li>15 min AM: check each channel's analytics in YT Studio</li>
+          <li>30 min: review the day's research/script output, approve or send back</li>
+          <li>Weekly: prep performance update</li>
+        </ul>
+        <h4>Tools</h4>
+        <p>YT Studio (Editor role), Claude Pro, Google Trends, team workspace</p>
+      </div>
+
+      <div class="role">
+        <h3><span class="role-num">ROLE 02</span>Research &amp; Ideation Specialist</h3>
+        <div class="meta-row"><strong>Capacity:</strong> 6–10 channels (research is AI-powered; bottleneck is verification + curation)</div>
+        <h4>Owns</h4>
+        <ul>
+          <li>Running the 4-prompt Claude sequence (Step 2)</li>
+          <li>Running Gemini Deep Research prompts</li>
+          <li>Google Trends verification on every topic</li>
+          <li>Delivering ranked topic briefs to the Strategist</li>
+        </ul>
+        <h4>Weekly Deliverable — Topic Brief per channel</h4>
+        <ul>
+          <li>10 validated topics from 20+ candidates</li>
+          <li>Google Trends screenshot for each</li>
+          <li>Competitor videos that performed on similar topics, with view counts</li>
+          <li>Recommended title variations per topic</li>
+          <li>Top 5 ranked</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <h3><span class="role-num">ROLE 03</span>Script Producer (Script Bible + Outline)</h3>
+        <div class="meta-row"><strong>Capacity:</strong> 4–6 channels</div>
+        <h4>Owns</h4>
+        <ul>
+          <li>Pulling 10 top competitor transcripts (or via vidIQ)</li>
+          <li>Running Claude to build the Script Bible</li>
+          <li>Running Gemini to generate the outline from Bible + title</li>
+          <li>Packaging the "Script Pack" for the human writer</li>
+          <li>QA on incoming scripts against the Bible</li>
+        </ul>
+        <h4>Weekly Deliverable</h4>
+        <p>2 fully-loaded Script Packs per channel per week (assuming 2 videos/week cadence)</p>
+      </div>
+
+      <div class="role">
+        <h3><span class="role-num">ROLE 04</span>Script Writer (HUMAN — Final Author)</h3>
+        <div class="meta-row"><strong>Critical rule:</strong> Scott's system explicitly says do NOT have Claude or Gemini write the final. Human only.</div>
+        <h4>Owns</h4>
+        <ul>
+          <li>Taking the Script Pack and writing the final, research-packed script</li>
+          <li>Hitting the hook in the first 30 seconds</li>
+          <li>Weaving in the research Gemini surfaced</li>
+          <li>Following the Script Bible's tone/structure</li>
+        </ul>
+        <h4>Cost &amp; hiring</h4>
+        <p>$25–$75 per script. Hire 3–4 writers initially for redundancy. Source: Upwork, ProBlogger, similar. Output: 10–15 min video script (~1,500–2,200 words).</p>
+      </div>
+
+      <div class="role">
+        <h3><span class="role-num">ROLE 05</span>Video Editor</h3>
+        <h4>Owns</h4>
+        <ul>
+          <li>Taking the final script + research imagery + voiceover</li>
+          <li>Producing a polished 10–15 min video</li>
+          <li>B-roll sourcing (stock + AI-generated as needed)</li>
+          <li>Captions, lower thirds, transitions</li>
+        </ul>
+        <h4>Cost &amp; hiring</h4>
+        <p>$25–$50 per video at volume. Hire 2–3 editors for redundancy.</p>
+      </div>
+
+      <div class="role">
+        <h3><span class="role-num">ROLE 06</span>Voiceover Artist</h3>
+        <h4>Options</h4>
+        <ul>
+          <li><strong>AI VO (ElevenLabs)</strong> — $22/mo unlimited at Creator tier. Fast, cheap, quality varies by niche.</li>
+          <li><strong>Human VO</strong> — $0.10–$0.25/word ≈ $150–$550 per video. Use when audience expects it or when AI sounds off.</li>
+        </ul>
+        <h4>Recommendation</h4>
+        <p>Start with ElevenLabs. Switch to human VO when a specific niche demands it.</p>
+      </div>
+
+      <div class="role">
+        <h3><span class="role-num">ROLE 07</span>Thumbnail Designer</h3>
+        <div class="meta-row"><strong>Note:</strong> YouTube thumbnail design is a distinct specialty from general graphic design.</div>
+        <h4>Owns</h4>
+        <ul>
+          <li>2–3 thumbnail variants per video for testing</li>
+          <li>Following high-CTR patterns identified in competitor analysis</li>
+          <li>Rapid iteration based on CTR data</li>
+        </ul>
+        <h4>Cost</h4>
+        <p>$15–$35 per thumbnail at volume. Start with 1–2 designers.</p>
+      </div>
+
+      <div class="role">
+        <h3><span class="role-num">ROLE 08</span>Publisher / Coordinator</h3>
+        <div class="meta-row"><strong>Capacity:</strong> 20+ channels comfortably — high-leverage, lower-skill</div>
+        <h4>Owns</h4>
+        <ul>
+          <li>Uploading to YouTube Studio</li>
+          <li>Setting tags, descriptions, hashtags</li>
+          <li>Scheduling publish times per audience time zone</li>
+          <li>Adding end screens + cards</li>
+          <li>Filing analytics screenshots weekly</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 10 RHYTHM -->
+    <section id="rhythm">
+      <h2><span class="num-tag">Section 10</span><br>The Weekly Operating Rhythm</h2>
+      <p class="section-intro">
+        Five-day rhythm. Each day has a clean focus. This is what running multiple channels looks like in practice when the system is humming.
+      </p>
+
+      <div class="day-grid">
+        <div class="day">
+          <h4>MONDAY</h4>
+          <div class="day-title">Planning</div>
+          <ul>
+            <li>8 AM: Researcher pulls analytics from every channel, posts summary</li>
+            <li>9 AM: Strategist reviews, flags underperformers</li>
+            <li>10 AM: Research sprint for the week's videos</li>
+            <li>PM: Topic Briefs sent to Strategist for approval</li>
+          </ul>
+        </div>
+        <div class="day">
+          <h4>TUESDAY</h4>
+          <div class="day-title">Production Day 1</div>
+          <ul>
+            <li>Script Producer runs Script Bible + outline for approved topics</li>
+            <li>Script Pack sent to writers</li>
+            <li>First video of the week goes live</li>
+          </ul>
+        </div>
+        <div class="day">
+          <h4>WEDNESDAY</h4>
+          <div class="day-title">Write &amp; Edit</div>
+          <ul>
+            <li>Writers working on final scripts</li>
+            <li>Editors cutting previous video</li>
+            <li>Thumbnail designers producing variants</li>
+          </ul>
+        </div>
+        <div class="day">
+          <h4>THURSDAY</h4>
+          <div class="day-title">Publish &amp; Measure</div>
+          <ul>
+            <li>Second video of the week goes live</li>
+            <li>Publisher sets tags, descriptions, hashtags</li>
+            <li>Analytics check at 24 hrs, Strategist notes patterns</li>
+          </ul>
+        </div>
+        <div class="day">
+          <h4>FRIDAY</h4>
+          <div class="day-title">Iterate &amp; Report</div>
+          <ul>
+            <li>Weekly performance report compiled</li>
+            <li>Strategist notes for next week's direction</li>
+            <li>Team retro: what worked, what broke, what's the fix</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 TOOLS -->
+    <section id="tools">
+      <h2><span class="num-tag">Section 11</span><br>The Tool Stack</h2>
+      <p class="section-intro">
+        Three tiers. Day 1 minimum is ~$116/month. Add tools as the channel matures and revenue justifies them. Don't buy the scale stack until the growth stack is producing winners.
+      </p>
+
+      <div class="tier">
+        <div class="head"><h3>Day 1 Essentials</h3><span class="price">~$116/mo</span></div>
+        <ul>
+          <li><strong>Claude Pro</strong> ($20/mo) — channel data extraction, title analysis, topic ranking, Script Bible, analytics. <em>Pro needed for the Chrome extension — Scott references this constantly.</em></li>
+          <li><strong>Gemini Advanced</strong> ($20/mo) — Deep Research mode for niche research and outline generation. Deep Research is gated behind paid tier.</li>
+          <li><strong>vidIQ Boost+</strong> ($39/mo) — competitor tag analysis, transcript pulling, channel intelligence. <em>This is where the tag hack lives.</em></li>
+          <li><strong>ElevenLabs Creator</strong> ($22/mo) — unlimited AI voiceover at solid quality.</li>
+          <li><strong>Canva Pro</strong> ($15/mo) — thumbnail design + quick graphics.</li>
+        </ul>
+      </div>
+
+      <div class="tier">
+        <div class="head"><h3>Add by Month 2</h3><span class="price">+$60/mo + $228/yr</span></div>
+        <ul>
+          <li><strong>Second Claude Pro seat</strong> ($20/mo) — strategist + researcher both need it</li>
+          <li><strong>Storyblocks Unlimited All-Access</strong> ($228/yr ≈ $19/mo) — stock video, audio, images</li>
+          <li><strong>Adobe Premiere Pro</strong> ($23/mo) — if editor needs it (DaVinci Resolve is a free alternative)</li>
+        </ul>
+      </div>
+
+      <div class="tier">
+        <div class="head"><h3>Add by Month 3 — Scale tier</h3><span class="price">+$80–150/mo</span></div>
+        <ul>
+          <li><strong>Third Claude + Gemini seats</strong> as the team grows</li>
+          <li><strong>Midjourney Pro</strong> ($60/mo) — AI visuals when stock doesn't cut it</li>
+          <li><strong>Runway ML Standard</strong> ($15/mo) — AI motion graphics</li>
+          <li><strong>Team plans</strong> where the per-seat math makes sense (Claude Team at $25/user/mo for 3+ users)</li>
+        </ul>
+      </div>
+
+      <h3>Free / built-in tools (use from Day 1)</h3>
+      <ul>
+        <li><strong>YouTube Studio</strong> — uploads, analytics, monetization management. Free, comes with YouTube.</li>
+        <li><strong>Google Trends</strong> — topic validation. Filter: US · Past 12 months · YouTube Search.</li>
+        <li><strong>Looker Studio</strong> — free Google product with native YouTube Analytics connector. Build dashboards once, deploy per channel.</li>
+        <li><strong>DaVinci Resolve</strong> — free tier is excellent; rival to Premiere for editing.</li>
+        <li><strong>Pexels / Pixabay</strong> — free stock footage backup.</li>
+      </ul>
+
+      <h3>Monthly cost at 5 channels (steady state)</h3>
+      <table class="tbl">
+        <thead><tr><th>Line item</th><th>Cost/mo</th></tr></thead>
+        <tbody>
+          <tr><td>Software stack (Claude × 3, Gemini × 2, vidIQ, ElevenLabs, Canva, Adobe, Midjourney, Storyblocks)</td><td>~$278</td></tr>
+          <tr><td>Production labor (75 videos/mo × ~$100 avg all-in)</td><td>~$7,500</td></tr>
+          <tr><td><strong>Total cost of goods</strong></td><td><strong>~$7,800</strong></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 12 METRICS -->
+    <section id="metrics">
+      <h2><span class="num-tag">Section 12</span><br>Metrics &amp; Diagnostics</h2>
+      <p class="section-intro">
+        Two core metrics drive every decision: CTR and APV. Together they tell you exactly what's broken. Memorize the diagnostic matrix.
+      </p>
+
+      <h3>CTR — Click-Through Rate</h3>
+      <table class="tbl">
+        <thead><tr><th>CTR</th><th>Verdict</th><th>What to do</th></tr></thead>
+        <tbody>
+          <tr><td class="first"><span class="strong-num">10%+</span></td><td>Target. You're winning.</td><td>Replicate the pattern</td></tr>
+          <tr><td class="first">5–10%</td><td>Acceptable, room to grow</td><td>A/B test new thumbnails on top performers</td></tr>
+          <tr><td class="first">3–5%</td><td>Weak, needs iteration</td><td>Rework thumbnail + title</td></tr>
+          <tr><td class="first">&lt;3%</td><td>Broken</td><td>Stop scheduling new videos in this format until fixed</td></tr>
+        </tbody>
+      </table>
+
+      <h3>APV — Average Percentage Viewed</h3>
+      <table class="tbl">
+        <thead><tr><th>APV</th><th>Verdict</th><th>What to do</th></tr></thead>
+        <tbody>
+          <tr><td class="first"><span class="strong-num">30%+</span></td><td>Target. Hook is landing.</td><td>Document the Script Bible pattern</td></tr>
+          <tr><td class="first">25–30%</td><td>Acceptable</td><td>Sharpen the first 30 seconds</td></tr>
+          <tr><td class="first">20–25%</td><td>Script has holes</td><td>Run Prompt 4-2 hook analysis; restructure</td></tr>
+          <tr><td class="first">&lt;20%</td><td>Script is broken</td><td>Stop the cluster; rework script approach</td></tr>
+        </tbody>
+      </table>
+
+      <h3>The diagnostic matrix</h3>
+      <div class="diag-grid">
+        <div class="diag">
+          <div class="diag-pair"><span class="badge high">CTR HIGH</span><span class="badge high">APV HIGH</span></div>
+          <h4>Clicking + staying — winning</h4>
+          <p class="fix">Nothing is broken. <strong>Make more videos in this exact pattern.</strong></p>
+        </div>
+        <div class="diag">
+          <div class="diag-pair"><span class="badge high">CTR HIGH</span><span class="badge low">APV LOW</span></div>
+          <h4>Clicking + bouncing — script problem</h4>
+          <p class="fix">Thumbnail/title hook works, but the script can't hold them. <strong>Fix the first 30 seconds. Re-script future videos in the cluster.</strong></p>
+        </div>
+        <div class="diag">
+          <div class="diag-pair"><span class="badge low">CTR LOW</span><span class="badge high">APV HIGH</span></div>
+          <h4>Not clicking + staying — packaging problem</h4>
+          <p class="fix">People who watch love it, but nobody's clicking. <strong>New thumbnails, new title variants. The content's fine.</strong></p>
+        </div>
+        <div class="diag">
+          <div class="diag-pair"><span class="badge low">CTR LOW</span><span class="badge low">APV LOW</span></div>
+          <h4>Not clicking + bouncing — wrong topic</h4>
+          <p class="fix">Topic/niche mismatch. <strong>Rethink: is this topic actually right for this channel? Abandon and reallocate.</strong></p>
+        </div>
+      </div>
+
+      <h3>Secondary metrics to track</h3>
+      <ul>
+        <li><strong>Subscriber conversion rate</strong> — subs gained ÷ views. Target: 1%+ established, 2%+ new channels.</li>
+        <li><strong>Watch time per video</strong> — 15-min video × 30% APV = 4.5 min/view. Longer videos compound watch hours faster — critical for YPP.</li>
+        <li><strong>RPM</strong> — $7+ minimum for the niche, $10+ for "good" niches. RPM × Views = Revenue.</li>
+        <li><strong>Traffic source mix</strong> — healthy split: Browse 25–40%, Suggested 30–50%, Search 15–25%, External &lt;10%.</li>
+      </ul>
+
+      <div class="quote">
+        "Check your data. Numbers don't lie. If you think a niche is dead, something you're doing is wrong."
+        <span class="attr">— Scott Smith</span>
+      </div>
+    </section>
+
+    <!-- 13 CHECKLISTS -->
+    <section id="checklists">
+      <h2><span class="num-tag">Section 13</span><br>Quality Gates — Pre-Upload &amp; Post-Upload</h2>
+      <p class="section-intro">
+        Every video clears these checklists before publishing. The Publisher enforces the pre-upload gate. The Strategist owns the post-upload monitoring.
+      </p>
+
+      <h3>Pre-upload gate</h3>
+
+      <div class="two-col">
+        <div class="checklist">
+          <h4>Topic validation</h4>
+          <ul>
+            <li>Topic came from validated list (Prompt 2-4 + Google Trends)</li>
+            <li>Google Trends shows rising or stable in past 90 days</li>
+            <li>No obvious demonetization risk</li>
+            <li>Similar competitor videos performed above niche median</li>
+          </ul>
+        </div>
+        <div class="checklist">
+          <h4>Title</h4>
+          <ul>
+            <li>Under 70 characters (won't get truncated)</li>
+            <li>Contains primary keyword for the topic</li>
+            <li>Has emotional hook (curiosity, urgency, stakes)</li>
+            <li>3 variants generated, best one selected</li>
+            <li>Doesn't over-promise (clickbait kills APV)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="checklist">
+          <h4>Thumbnail</h4>
+          <ul>
+            <li>High contrast, readable at small size</li>
+            <li>Face or focal element (90%+ of top performers have one)</li>
+            <li>2–3 variants produced minimum</li>
+            <li>Designer applied niche-winning patterns</li>
+            <li>No misleading imagery</li>
+          </ul>
+        </div>
+        <div class="checklist">
+          <h4>Script</h4>
+          <ul>
+            <li>Hook grabs attention in first 15 seconds</li>
+            <li>Key question / stakes established by 30s mark</li>
+            <li>Research-backed (Gemini + Script Bible)</li>
+            <li>No bloat or slow sections</li>
+            <li>Length 10–15 min (sweet spot for monetization)</li>
+            <li>CTA placement strong</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="checklist">
+          <h4>Production</h4>
+          <ul>
+            <li>VO clear and well-paced</li>
+            <li>B-roll matches narration (no generic stock)</li>
+            <li>Audio levels consistent</li>
+            <li>Captions cleaned up</li>
+            <li>End screen configured (subscribe + next video)</li>
+          </ul>
+        </div>
+        <div class="checklist">
+          <h4>Upload</h4>
+          <ul>
+            <li>Title, description, tags, hashtags all set</li>
+            <li>3–5 hashtags in top of description</li>
+            <li>Video tags include niche keywords (via vidIQ)</li>
+            <li>Publish time aligned to audience time zone (US prime 4–9 PM ET)</li>
+            <li>Playlist assignment correct</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Post-upload monitoring</h3>
+
+      <div class="two-col">
+        <div class="checklist">
+          <h4>24-hour check</h4>
+          <ul>
+            <li>Impressions flowing (algorithm sending test traffic)</li>
+            <li>Initial CTR visible</li>
+            <li>Initial APV trend visible</li>
+            <li>No copyright or content flags</li>
+          </ul>
+        </div>
+        <div class="checklist">
+          <h4>48-hour check</h4>
+          <ul>
+            <li>If CTR &lt; 5%: run Prompt 4-1 CTR diagnostic</li>
+            <li>Look at retention graph for drop-off points</li>
+            <li>If both CTR + APV weak: flag for Strategist review</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="checklist">
+          <h4>7-day check</h4>
+          <ul>
+            <li>Compare to channel median</li>
+            <li>Flag as winner / average / underperformer</li>
+            <li>Note takeaways for next week's planning</li>
+          </ul>
+        </div>
+        <div class="checklist">
+          <h4>30-day check</h4>
+          <ul>
+            <li>Calculate cumulative revenue per video</li>
+            <li>Identify "3 of 22" winner category</li>
+            <li>Decision: replicate the cluster, or pivot direction</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 DECISIONS -->
+    <section id="decisions">
+      <h2><span class="num-tag">Section 14</span><br>When to double down vs. cut the fat.</h2>
+      <p class="section-intro">
+        The portfolio principle says 3 of 22 videos drive 90% of revenue. Your job is to identify the winners fast and pour more production into them, and to stop bleeding into clusters that aren't working.
+      </p>
+
+      <div class="two-col">
+        <div class="checklist" style="border-left: 3px solid var(--good);">
+          <h4 style="color: var(--good);">↗ Double down signals</h4>
+          <ul>
+            <li>CTR consistently 8%+ across a topic cluster</li>
+            <li>APV consistently 35%+ on a specific format</li>
+            <li>One video from a cluster got 3× channel median views</li>
+            <li>Retention graph shows viewers binge-watching multiple videos in series</li>
+          </ul>
+          <p style="margin-top: 14px; font-size: 14px;"><strong style="color: var(--good);">Action:</strong> Make 3–5 more videos in the same cluster/format within 2 weeks. Capture the algorithmic momentum.</p>
+        </div>
+        <div class="checklist" style="border-left: 3px solid var(--bad);">
+          <h4 style="color: var(--bad);">↘ Cut the fat signals</h4>
+          <ul>
+            <li>Topic cluster averaging &lt;5% CTR after 4+ attempts</li>
+            <li>Specific format consistently underperforming</li>
+            <li>Audience retention plateaus low even with script iterations</li>
+            <li>Zero subscriber conversion from a topic area</li>
+          </ul>
+          <p style="margin-top: 14px; font-size: 14px;"><strong style="color: var(--bad);">Action:</strong> Stop making content in that cluster/format. Reallocate production capacity to a winning cluster.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 INSIGHTS -->
+    <section id="insights">
+      <h2><span class="num-tag">Section 15</span><br>Scott's 7 Mindset Insights</h2>
+      <p class="section-intro">
+        These are the principles to internalize. Every team member should be able to quote these back. They're the operating system underneath the SOPs.
+      </p>
+
+      <div class="insight-grid">
+        <div class="insight"><div class="n">INSIGHT 01</div><p>"You need a few videos to really pop off. The rest carry weight, but those few drive everything."</p></div>
+        <div class="insight"><div class="n">INSIGHT 02</div><p>"Don't let AI do everything. Use it as a channel partner, not a replacement."</p></div>
+        <div class="insight"><div class="n">INSIGHT 03</div><p>"Most people are too focused on going viral. Play the numbers game and wait for the one that pops."</p></div>
+        <div class="insight"><div class="n">INSIGHT 04</div><p>"Shorts don't pay. Long-form only."</p></div>
+        <div class="insight"><div class="n">INSIGHT 05</div><p>"The snowball effect is real. One hit pulls the whole channel up."</p></div>
+        <div class="insight"><div class="n">INSIGHT 06</div><p>"Check your data. Numbers don't lie. If you think a niche is dead, something you're doing is wrong."</p></div>
+        <div class="insight"><div class="n">INSIGHT 07</div><p>"It's like an investment portfolio: 10% of the stocks make up 90% of the value."</p></div>
+      </div>
+    </section>
+
+    <!-- CLOSING -->
+    <section>
+      <h2>The bottom line.</h2>
+      <p class="lead">
+        Scott Smith's system is not magic. It's: <em>pick a high-RPM niche, run the 4-prompt loop to find topics, build a Script Bible, hand the Pack to a writer, ship two videos a week, watch CTR and APV, double down on winners, scale to channel two when channel one is humming.</em>
+      </p>
+      <p class="lead">
+        The formulas are templated. The prompts are copy-paste ready. The roles are defined. The metrics tell you exactly what's broken and exactly what's working. The portfolio principle handles the variance.
+      </p>
+      <p class="lead" style="color: var(--accent-2); font-weight: 600;">
+        Pick a niche. Run Step 1 today. Don't wait for the perfect plan — the analytics will write it for you.
+      </p>
+    </section>
+
+    <!-- FOOTER -->
+    <section class="footer-section">
+      <p>Source: Scott Smith live workshop (~57 min recording, two segments) · April 2026<br>
+      Compiled from: voice memo transcripts + 9 deliverable docs (methodology, prompt library, quality gates, tool stack, team playbook)<br>
+      Internal team training playbook — not for external distribution</p>
+    </section>
+
+  </div>
+</div>
+</body>
+</html>

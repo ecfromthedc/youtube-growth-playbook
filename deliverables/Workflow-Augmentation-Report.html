@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube Growth Workflow — Augmentation &amp; Tooling Report (May 2026)</title>
+<style>
+:root {
+  --bg: #0a0e13;
+  --bg-2: #131820;
+  --bg-3: #1c232d;
+  --panel: #181f28;
+  --ink: #eef3f8;
+  --ink-2: #b7c2d0;
+  --ink-3: #7d8a99;
+  --accent: #ff0033;
+  --accent-2: #f5b945;
+  --accent-3: #4fd1c5;
+  --good: #5ee3a1;
+  --warn: #ffb84d;
+  --bad: #ff6b6b;
+  --line: #2a3340;
+  --code-bg: #08]0c11;
+  --shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.shell {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  background: var(--bg-2);
+  border-right: 1px solid var(--line);
+  padding: 32px 24px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar .brand {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--ink-3);
+  margin-bottom: 6px;
+}
+.sidebar .brand strong { color: var(--accent); }
+
+.sidebar h2 {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 28px;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+}
+
+.sidebar nav { display: flex; flex-direction: column; gap: 2px; }
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  color: var(--ink-2);
+  text-decoration: none;
+  font-size: 13.5px;
+  transition: all 0.15s ease;
+}
+.sidebar nav a:hover { background: var(--bg-3); color: var(--ink); }
+.sidebar nav a .num {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ink-3);
+  background: var(--bg-3);
+  border-radius: 4px;
+  padding: 2px 6px;
+  min-width: 26px;
+  text-align: center;
+}
+.sidebar .group-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--ink-3);
+  margin: 16px 12px 8px;
+  font-weight: 700;
+}
+.sidebar .footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  color: var(--ink-3);
+  line-height: 1.6;
+}
+
+.main { padding: 0; }
+
+section {
+  padding: 80px 64px;
+  border-bottom: 1px solid var(--line);
+  max-width: 1180px;
+}
+
+section.hero {
+  background: radial-gradient(ellipse at top right, rgba(255, 0, 51, 0.08), transparent 60%), linear-gradient(135deg, #1a2028 0%, #0a0e13 100%);
+  padding: 96px 64px 80px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 62px;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -1.8px;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #fff 0%, #b7c2d0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h2 {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  margin-bottom: 18px;
+  line-height: 1.12;
+}
+
+h2 .num-tag {
+  display: inline-block;
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-top: 36px;
+  margin-bottom: 14px;
+  letter-spacing: -0.3px;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 24px;
+  margin-bottom: 10px;
+  color: var(--accent-2);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+p { margin-bottom: 14px; color: var(--ink-2); font-size: 16px; }
+
+.lead {
+  font-size: 19px;
+  color: var(--ink);
+  max-width: 760px;
+  line-height: 1.55;
+  margin-bottom: 28px;
+}
+
+.section-intro {
+  font-size: 17px;
+  color: var(--ink-2);
+  max-width: 800px;
+  margin-bottom: 36px;
+  line-height: 1.6;
+}
+
+ul, ol { padding-left: 22px; margin-bottom: 18px; }
+li { margin-bottom: 8px; color: var(--ink-2); }
+
+strong { color: var(--ink); font-weight: 700; }
+em { color: var(--accent-2); font-style: normal; font-weight: 600; }
+
+code {
+  font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  font-size: 13px;
+  background: var(--bg-3);
+  color: var(--accent-3);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+a { color: var(--accent-3); text-decoration: none; border-bottom: 1px dashed rgba(79, 209, 197, 0.4); }
+a:hover { color: var(--ink); border-bottom-color: var(--accent-3); }
+
+/* Stats */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.stat {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px;
+}
+
+.stat .num {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--accent-2);
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat .label {
+  font-size: 12px;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+/* Stage cards (workflow stages) */
+.stage {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0;
+  margin: 36px 0;
+  overflow: hidden;
+}
+
+.stage .head {
+  background: linear-gradient(135deg, var(--bg-3), var(--bg-2));
+  border-bottom: 1px solid var(--line);
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.stage .head .stage-num {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--accent);
+  text-transform: uppercase;
+  background: rgba(255, 0, 51, 0.1);
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 0, 51, 0.3);
+}
+
+.stage .head .stage-title {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: var(--ink);
+}
+
+.stage .body {
+  padding: 28px 32px 32px;
+}
+
+.stage .meta-row {
+  font-size: 13px;
+  color: var(--ink-3);
+  margin: 4px 0;
+}
+.stage .meta-row strong { color: var(--accent-2); font-weight: 600; }
+
+/* Tool cards inside stages */
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin: 18px 0 24px;
+}
+
+.tool {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 18px 20px;
+  transition: all 0.2s ease;
+}
+
+.tool:hover {
+  border-color: var(--accent-2);
+  transform: translateY(-1px);
+}
+
+.tool.recommended {
+  border-left: 3px solid var(--good);
+}
+.tool.consider {
+  border-left: 3px solid var(--accent-2);
+}
+.tool.experimental {
+  border-left: 3px solid var(--accent-3);
+}
+
+.tool .tool-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.tool .tool-name {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.2px;
+}
+
+.tool .tool-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+.tool .tool-tag.rec { background: rgba(94, 227, 161, 0.15); color: var(--good); border: 1px solid rgba(94, 227, 161, 0.3); }
+.tool .tool-tag.alt { background: rgba(245, 185, 69, 0.12); color: var(--accent-2); border: 1px solid rgba(245, 185, 69, 0.3); }
+.tool .tool-tag.exp { background: rgba(79, 209, 197, 0.12); color: var(--accent-3); border: 1px solid rgba(79, 209, 197, 0.3); }
+.tool .tool-tag.have { background: rgba(255, 0, 51, 0.12); color: var(--accent); border: 1px solid rgba(255, 0, 51, 0.3); }
+
+.tool .tool-price {
+  font-size: 12px;
+  color: var(--ink-3);
+  margin-bottom: 8px;
+  font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+}
+
+.tool .tool-desc {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+
+/* Recommendation box */
+.recommend-box {
+  background: rgba(94, 227, 161, 0.05);
+  border: 1px solid rgba(94, 227, 161, 0.25);
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin: 20px 0;
+}
+
+.recommend-box .label {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--good);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.recommend-box p {
+  margin: 0;
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+/* Asset audit panels */
+.asset-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.asset {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px 24px;
+}
+
+.asset .status {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.asset .status.installed { background: rgba(94, 227, 161, 0.15); color: var(--good); border: 1px solid rgba(94, 227, 161, 0.3); }
+.asset .status.documented { background: rgba(245, 185, 69, 0.12); color: var(--accent-2); border: 1px solid rgba(245, 185, 69, 0.3); }
+.asset .status.skill { background: rgba(79, 209, 197, 0.12); color: var(--accent-3); border: 1px solid rgba(79, 209, 197, 0.3); }
+
+.asset h4 {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-top: 0;
+  margin-bottom: 8px;
+  text-transform: none;
+  letter-spacing: -0.2px;
+}
+
+.asset p { font-size: 14px; margin-bottom: 8px; }
+.asset .source { font-size: 11px; color: var(--ink-3); font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; word-break: break-all; }
+
+/* Moat panel */
+.moat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 28px 0;
+}
+
+.moat {
+  background: linear-gradient(135deg, rgba(255, 0, 51, 0.05), rgba(245, 185, 69, 0.04));
+  border: 1px solid rgba(255, 0, 51, 0.25);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.moat .moat-num {
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.moat h3 {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+
+.moat p {
+  font-size: 14px;
+  color: var(--ink-2);
+  margin-bottom: 0;
+  line-height: 1.55;
+}
+
+/* Tables */
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 22px 0;
+  background: var(--panel);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.tbl th, .tbl td {
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+
+.tbl th {
+  background: var(--bg-3);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--accent-2);
+}
+
+.tbl tr:last-child td { border-bottom: none; }
+
+.tbl td.first { font-weight: 700; color: var(--ink); }
+
+/* Roadmap */
+.roadmap {
+  margin: 28px 0;
+}
+
+.week {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 28px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.week:last-child { border-bottom: none; }
+
+.week .week-label h4 {
+  margin: 0 0 6px;
+  color: var(--accent);
+  font-size: 12px;
+}
+
+.week .week-label .title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+}
+
+.week ul { padding-left: 20px; margin: 0; }
+.week li { color: var(--ink-2); font-size: 14.5px; margin-bottom: 6px; }
+
+.week li code { font-size: 12px; }
+
+.footer-section {
+  padding: 60px 64px;
+  background: var(--bg-2);
+  text-align: center;
+  border-bottom: none;
+}
+.footer-section p { font-size: 13px; color: var(--ink-3); }
+
+@media (max-width: 900px) {
+  .shell { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; }
+  section { padding: 56px 28px; }
+  section.hero { padding: 64px 28px; }
+  h1 { font-size: 38px; }
+  h2 { font-size: 26px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .week { grid-template-columns: 1fr; gap: 12px; }
+  .stage .head { flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside class="sidebar">
+    <div class="brand">YOUTUBE GROWTH · <strong>AUGMENTATION</strong></div>
+    <h2>Workflow Tooling Report — May 2026</h2>
+    <nav>
+      <div class="group-label">Overview</div>
+      <a href="#intro"><span class="num">01</span> Executive Summary</a>
+      <a href="#assets"><span class="num">02</span> Asset Audit (Internal)</a>
+
+      <div class="group-label">Per-Stage Tool Deep Dive</div>
+      <a href="#stage-niche"><span class="num">03</span> Niche Selection</a>
+      <a href="#stage-ideation"><span class="num">04</span> Topic Ideation</a>
+      <a href="#stage-script"><span class="num">05</span> Script Creation</a>
+      <a href="#stage-voice"><span class="num">06</span> Voiceover</a>
+      <a href="#stage-thumbnail"><span class="num">07</span> Thumbnails</a>
+      <a href="#stage-video"><span class="num">08</span> Video / B-Roll</a>
+      <a href="#stage-edit"><span class="num">09</span> Assembly &amp; Edit</a>
+      <a href="#stage-analytics"><span class="num">10</span> Channel Intelligence</a>
+      <a href="#stage-repurpose"><span class="num">11</span> Repurposing</a>
+
+      <div class="group-label">Strategic</div>
+      <a href="#moat"><span class="num">12</span> The Moat</a>
+      <a href="#roadmap"><span class="num">13</span> 4-Week Upgrade Roadmap</a>
+    </nav>
+    <div class="footer">
+      Sources: Alexandria internal knowledge base · Live market research May 2026<br>
+      Stack as of: 2026-05-11
+    </div>
+  </aside>
+
+  <div class="main">
+
+    <!-- HERO -->
+    <section class="hero" id="intro">
+      <span class="eyebrow">Workflow Augmentation Report · 9 Stages · May 2026</span>
+      <h1>What it takes to be the best at growing YouTube channels.</h1>
+      <p class="lead">
+        We started with Scott Smith's 5-step methodology — niche, ideation, script, publish, scale. This report audits the workflow against two things: <em>what we already own inside our knowledge base</em>, and <em>the state of the AI market today</em>. Each of the 9 workflow stages gets a tool stack, a recommended upgrade, and a do-this-now action.
+      </p>
+      <p class="lead" style="color: var(--ink-2); font-size: 16px;">
+        The thesis: we already own ~30% of the best-in-class stack inside Alexandria. Closing the other 70% — across niche intelligence, AI video generation, thumbnail testing, and analytics dashboards — is what lets us credibly say we're the best at growing YouTube pages.
+      </p>
+
+      <div class="stats">
+        <div class="stat"><div class="num">9</div><div class="label">Workflow Stages</div></div>
+        <div class="stat"><div class="num">35+</div><div class="label">Tools Evaluated</div></div>
+        <div class="stat"><div class="num">7</div><div class="label">Already in Vault</div></div>
+        <div class="stat"><div class="num">4 wk</div><div class="label">To Best-In-Class</div></div>
+      </div>
+    </section>
+
+    <!-- 02 ASSET AUDIT -->
+    <section id="assets">
+      <h2><span class="num-tag">Section 02</span><br>Asset audit — what we already own.</h2>
+      <p class="section-intro">
+        Before buying anything new, here's what we have. Every entry below is already in the Library of Alexandria with research, install notes, or active deployment. These are the foundation we're augmenting.
+      </p>
+
+      <div class="asset-grid">
+        <div class="asset">
+          <span class="status installed">✓ INSTALLED</span>
+          <h4>Clipify</h4>
+          <p>Open-source Claude Code skill — long video → 3 vertical clips with speaker tracking + opus-style captions. Whisper + ffmpeg locally. Replaces OpusClip ($95/mo) + Submagic ($67/mo). MIT licensed.</p>
+          <p class="source">~/.claude/skills/clipify/ · trigger: /clipify · forked to ecfromthedc/clipify</p>
+        </div>
+
+        <div class="asset">
+          <span class="status documented">✓ DOCUMENTED</span>
+          <h4>Nano Banana 2 (Gemini 3.1 Flash Image)</h4>
+          <p>Google's image model with best-in-class text rendering — critical for thumbnails. $0.067/image at 1K. MCP server available for Claude Code integration. Nano Banana Pro tier for high-stakes work.</p>
+          <p class="source">Alexandria/AI &amp; Automation/NanoBanana 2 Research Brief.md</p>
+        </div>
+
+        <div class="asset">
+          <span class="status documented">✓ DOCUMENTED</span>
+          <h4>Seedance 2.0 + Higsfield workflow</h4>
+          <p>Full UGC ad automation: Claude Desktop computer-use → Higsfield → Nano Banana Pro avatars → Seedance 2.0 video. Overnight runs producing hundreds of variants. RPN's playbook captured end-to-end.</p>
+          <p class="source">Alexandria/AI &amp; Automation/UGC Ad Automation with AI Avatar Generation.md</p>
+        </div>
+
+        <div class="asset">
+          <span class="status documented">✓ DOCUMENTED</span>
+          <h4>100 Ad Creatives in 4 Min Pipeline</h4>
+          <p>Nano Banana 2 + Claude Code agent + Meta Ad Library API. Generate 100 creatives, push directly to Meta Ads Manager, dashboard tracks performance same-day. Adaptable for YouTube thumbnail A/B testing.</p>
+          <p class="source">Alexandria/AI &amp; Automation/AI - Powered Ad Creative Pipeline.md</p>
+        </div>
+
+        <div class="asset">
+          <span class="status skill">✓ SKILL LIBRARY</span>
+          <h4>Marc Cleroux skills suite</h4>
+          <p>12 installed Claude Code skills including <code>script</code> (long-form scriptwriting), <code>hooks</code> (proven viral hook database), <code>repurpose</code> (cross-platform repurposing). Composable with Clipify.</p>
+          <p class="source">~/.claude/skills/ · 12 skills installed 2026-04-19</p>
+        </div>
+
+        <div class="asset">
+          <span class="status documented">✓ DOCUMENTED</span>
+          <h4>11Labs voice replacement workflow</h4>
+          <p>Documented audio-replace pipeline using 11Labs to swap VO on existing footage. Premiere Pro sync workflow captured. Direct application for re-voicing AI-narrated faceless content.</p>
+          <p class="source">Alexandria/AI &amp; Automation/Tools &amp; Capabilities/AI Voice Replacement with 11Labs.md</p>
+        </div>
+
+        <div class="asset">
+          <span class="status documented">✓ DOCUMENTED</span>
+          <h4>Local TTS — VibeVoice + RVC</h4>
+          <p>Self-hosted text-to-speech alternative to ElevenLabs. RVC (Real-time Voice Cloning) for custom voices. Multi-language. Zero per-use cost once set up. Backup tier for unlimited VO needs.</p>
+          <p class="source">Alexandria/AI &amp; Automation/Tools &amp; Capabilities/Local Text - to - Speech Voice Generation.md</p>
+        </div>
+
+        <div class="asset">
+          <span class="status documented">✓ DOCUMENTED</span>
+          <h4>Claude Code Content Production System</h4>
+          <p>Full content production pipeline using Claude Code as orchestrator. Hook frameworks, script templates, automation patterns. Connects to Marc Cleroux skill suite.</p>
+          <p class="source">Alexandria/Content Strategy/Claude Code Content Production System.md</p>
+        </div>
+      </div>
+
+      <div class="recommend-box">
+        <div class="label">Verdict</div>
+        <p>Our knowledge base is strong on <strong>short-form repurposing, image generation, and ad creative pipelines</strong> — but light on <strong>long-form YouTube-specific tooling</strong> (channel intelligence, thumbnail A/B testing, AI script writing for 10–15 min videos, AI B-roll for narrative video). That's the gap this report fills.</p>
+      </div>
+    </section>
+
+    <!-- STAGE 1: NICHE SELECTION -->
+    <section id="stage-niche">
+      <h2><span class="num-tag">Section 03 · STAGE 1</span><br>Niche Selection</h2>
+      <p class="section-intro">
+        Picking a high-RPM niche with rising demand and a competitive gap. Currently: Claude + Gemini brainstorming, manual Google Trends verification. Augmentation: bring in dedicated channel-intelligence platforms that scan tens of thousands of YouTube channels for outlier patterns.
+      </p>
+
+      <div class="stage">
+        <div class="head">
+          <div class="stage-num">Stage 01</div>
+          <div class="stage-title">Niche Intelligence</div>
+        </div>
+        <div class="body">
+          <div class="tool-grid">
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">1of10</span><span class="tool-tag rec">ADD</span></div>
+              <div class="tool-price">~$49/mo</div>
+              <div class="tool-desc">Trained on YouTube outlier data — videos that performed 10x to 100x their channel average across 62B views. Surfaces niches with proven outlier patterns. Critical for the "find the gap" step.</div>
+            </div>
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">Spotter Studio</span><span class="tool-tag rec">ADD</span></div>
+              <div class="tool-price">~$59/mo</div>
+              <div class="tool-desc">Backed by MrBeast's investment fund. Specializes in channel-level intelligence — what's working in any niche, who's growing fastest, what topics they're winning on.</div>
+            </div>
+            <div class="tool consider">
+              <div class="tool-head"><span class="tool-name">ViewStats (Jimmy Donaldson)</span><span class="tool-tag alt">CONSIDER</span></div>
+              <div class="tool-price">$24–$199/mo</div>
+              <div class="tool-desc">MrBeast's own analytics platform. Deep channel/video benchmarking. Stronger for solo creators than agencies but useful for competitive intel.</div>
+            </div>
+            <div class="tool consider">
+              <div class="tool-head"><span class="tool-name">ChannelCrawler</span><span class="tool-tag alt">CONSIDER</span></div>
+              <div class="tool-price">$49–$399/mo</div>
+              <div class="tool-desc">Database of 50M+ channels, filterable by niche/subscribers/CPM. Best when scoping a new niche and need a competitor list fast.</div>
+            </div>
+          </div>
+
+          <div class="recommend-box">
+            <div class="label">Recommended Stack</div>
+            <p><strong>1of10 + Spotter Studio</strong> together cost ~$108/mo and replace days of manual research. Use 1of10 to find the outlier patterns inside a niche, Spotter to identify channels we should be reverse-engineering. Run alongside Claude/Gemini brainstorm — they validate each other.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE 2: IDEATION -->
+    <section id="stage-ideation">
+      <h2><span class="num-tag">Section 04 · STAGE 2</span><br>Topic Ideation</h2>
+      <p class="section-intro">
+        The 4-prompt loop (Claude → Claude → Gemini → Claude) plus Google Trends verification. This stage is already strong. Augmentations target speed (auto-running the loop) and intelligence (better data feeding the loop).
+      </p>
+
+      <div class="stage">
+        <div class="head">
+          <div class="stage-num">Stage 02</div>
+          <div class="stage-title">Topic Discovery &amp; Validation</div>
+        </div>
+        <div class="body">
+          <div class="tool-grid">
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">VidIQ Boost+ (AI features)</span><span class="tool-tag have">CURRENT</span></div>
+              <div class="tool-price">$39/mo</div>
+              <div class="tool-desc">Already in the playbook. 2026 update: AI ideation, structured creator coaching, daily ideas, niche scoring. Strongest for the "what should we make" question.</div>
+            </div>
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">Subscribr</span><span class="tool-tag rec">ADD</span></div>
+              <div class="tool-price">~$49/mo</div>
+              <div class="tool-desc">YouTube-native AI script + idea tool. Reverse-engineers viral videos to extract the hook, structure, retention triggers. Multi-model: GPT-5, Claude Sonnet, Gemini, Kimi all available.</div>
+            </div>
+            <div class="tool experimental">
+              <div class="tool-head"><span class="tool-name">Custom Claude prompt agent</span><span class="tool-tag exp">BUILD</span></div>
+              <div class="tool-price">$0 (our infra)</div>
+              <div class="tool-desc">Wrap the 4-prompt sequence in a Claude Code skill that takes a niche name + competitor channel URL and runs the full sequence automatically. Saves ~30 min per topic brief.</div>
+            </div>
+            <div class="tool consider">
+              <div class="tool-head"><span class="tool-name">Exploding Topics</span><span class="tool-tag alt">CONSIDER</span></div>
+              <div class="tool-price">$39–$249/mo</div>
+              <div class="tool-desc">Trend discovery before they hit Google Trends. Useful for "what's about to break" feed.</div>
+            </div>
+          </div>
+
+          <div class="recommend-box">
+            <div class="label">Recommended Stack</div>
+            <p>Keep VidIQ Boost+. Add Subscribr to challenge Claude's topic rankings with a YouTube-specifically-trained model. Build the Claude Code skill (~2 hours) to auto-run the 4-prompt sequence — biggest time saver in the entire stack.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE 3: SCRIPT -->
+    <section id="stage-script">
+      <h2><span class="num-tag">Section 05 · STAGE 3</span><br>Script Creation</h2>
+      <p class="section-intro">
+        Script Bible from 10 competitor transcripts → Gemini outline → human writer. Scott's rule: never let AI write the final. That holds. Augmentations target Bible generation (richer pattern extraction), outline quality (better-structured beats), and writer assist (real-time retention scoring).
+      </p>
+
+      <div class="stage">
+        <div class="head">
+          <div class="stage-num">Stage 03</div>
+          <div class="stage-title">Scripting Layer</div>
+        </div>
+        <div class="body">
+          <div class="tool-grid">
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">Claude Opus 4.7 (1M context)</span><span class="tool-tag have">CURRENT</span></div>
+              <div class="tool-price">$20–$200/mo</div>
+              <div class="tool-desc">Best in class for long-form structure, narrative arc analysis, Script Bible generation. 1M context window means we can feed it 30+ competitor transcripts at once.</div>
+            </div>
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">Gemini 2.5 Pro Deep Research</span><span class="tool-tag have">CURRENT</span></div>
+              <div class="tool-price">$20/mo</div>
+              <div class="tool-desc">Outline generation + research surfacing. Deep Research mode is the workhorse for "find me the 15 facts that need to be in this script."</div>
+            </div>
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">Subscribr AI Script Editor</span><span class="tool-tag rec">ADD</span></div>
+              <div class="tool-price">Bundled with Subscribr</div>
+              <div class="tool-desc">Critiques pacing, hooks, structure for retention. Writer pastes a draft, gets back specific drop-off predictions and rewrite suggestions. Used as a QA layer after the human writer.</div>
+            </div>
+            <div class="tool experimental">
+              <div class="tool-head"><span class="tool-name">GPT-5 (cross-validation only)</span><span class="tool-tag exp">EXPERIMENT</span></div>
+              <div class="tool-price">$20+/mo</div>
+              <div class="tool-desc">Best at hook generation per market research. Use as a second opinion on hook variations only — not as primary scripting tool. Claude wins on long-form.</div>
+            </div>
+            <div class="tool experimental">
+              <div class="tool-head"><span class="tool-name">Marc Cleroux 'hooks' + 'script' skills</span><span class="tool-tag have">INSTALLED</span></div>
+              <div class="tool-price">$0</div>
+              <div class="tool-desc">Already installed. Hook database scored against proven viral patterns. Cross-check writer's openings before publishing.</div>
+            </div>
+          </div>
+
+          <div class="recommend-box">
+            <div class="label">Recommended Stack</div>
+            <p>Claude Opus 4.7 (Bible + analysis) + Gemini 2.5 Pro (outline + research) + Subscribr (retention QA) + Marc's <code>hooks</code> skill (hook scoring) + human writer (final). Five layers, each doing what it's best at. The human still writes — the AI just removes the guesswork around them.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE 4: VOICE -->
+    <section id="stage-voice">
+      <h2><span class="num-tag">Section 06 · STAGE 4</span><br>Voiceover</h2>
+      <p class="section-intro">
+        Currently: ElevenLabs Creator ($22/mo). State of the art has moved fast — ElevenLabs v3 is still the quality leader for long-form, but Cartesia Sonic 3, Fish Audio, and Hume have closed the gap in specific dimensions.
+      </p>
+
+      <div class="stage">
+        <div class="head">
+          <div class="stage-num">Stage 04</div>
+          <div class="stage-title">AI Voice Generation</div>
+        </div>
+        <div class="body">
+          <div class="tool-grid">
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">ElevenLabs v3 (Creator / Pro)</span><span class="tool-tag have">CURRENT</span></div>
+              <div class="tool-price">$22–$99/mo</div>
+              <div class="tool-desc">Still the quality leader for long-form narration. Best breath placement, prosody, multi-minute consistency. Voice cloning gold standard. Keep as primary VO engine.</div>
+            </div>
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">Cartesia Sonic 3</span><span class="tool-tag rec">ADD</span></div>
+              <div class="tool-price">From $5/mo</div>
+              <div class="tool-desc">40–90ms time-to-first-audio — fastest commercial TTS. Use for rapid iteration (testing hooks, alt takes). ElevenLabs for the final render.</div>
+            </div>
+            <div class="tool consider">
+              <div class="tool-head"><span class="tool-name">Fish Audio</span><span class="tool-tag alt">CONSIDER</span></div>
+              <div class="tool-price">Pay-per-use</div>
+              <div class="tool-desc">#1 on TTS-Arena blind tests. Fraction of ElevenLabs cost. Best when budget pressure hits at scale (multi-channel ops).</div>
+            </div>
+            <div class="tool consider">
+              <div class="tool-head"><span class="tool-name">Hume AI Voice</span><span class="tool-tag alt">CONSIDER</span></div>
+              <div class="tool-price">$20+/mo</div>
+              <div class="tool-desc">Leads on emotion. Useful for niches where delivery emotion matters (true crime, drama, personal stories) — less critical for explainer / list / news.</div>
+            </div>
+            <div class="tool experimental">
+              <div class="tool-head"><span class="tool-name">Chatterbox (Resemble AI)</span><span class="tool-tag exp">OPEN-SOURCE</span></div>
+              <div class="tool-price">$0 (self-hosted)</div>
+              <div class="tool-desc">63.75% of blind listeners preferred over ElevenLabs in naturalness tests. MIT-licensed. Self-host for unlimited generation — kills per-minute cost at scale.</div>
+            </div>
+            <div class="tool experimental">
+              <div class="tool-head"><span class="tool-name">VibeVoice + RVC (local)</span><span class="tool-tag have">DOCUMENTED</span></div>
+              <div class="tool-price">$0</div>
+              <div class="tool-desc">Already in Alexandria. Local voice cloning + TTS. Backup for unlimited or sensitive use.</div>
+            </div>
+          </div>
+
+          <div class="recommend-box">
+            <div class="label">Recommended Stack</div>
+            <p>ElevenLabs v3 (primary) + Cartesia Sonic 3 (rapid iteration / draft takes) + Chatterbox self-hosted (overflow at scale, no per-second cost). Tiered model: Cartesia for drafts → ElevenLabs for finals → Chatterbox when we hit 100+ videos/month and the ElevenLabs bill becomes the line item to attack.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE 5: THUMBNAILS -->
+    <section id="stage-thumbnail">
+      <h2><span class="num-tag">Section 07 · STAGE 5</span><br>Thumbnails</h2>
+      <p class="section-intro">
+        The single highest-leverage asset in the workflow — thumbnails are 50% of CTR. State of the market: YouTube-specific AI thumbnail tools have leapfrogged general image generation. Use the YouTube-trained tools first, fall back to generative image models for custom needs.
+      </p>
+
+      <div class="stage">
+        <div class="head">
+          <div class="stage-num">Stage 05</div>
+          <div class="stage-title">Thumbnail Production &amp; Testing</div>
+        </div>
+        <div class="body">
+          <div class="tool-grid">
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">1of10 Thumbnails</span><span class="tool-tag rec">ADD</span></div>
+              <div class="tool-price">~$49/mo</div>
+              <div class="tool-desc">Trained on 62B views of outlier YouTube data. Generates thumbnails matched to what's actually winning in the niche. Pairs with their niche intelligence layer.</div>
+            </div>
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">Braiv Thumbnails</span><span class="tool-tag rec">ADD</span></div>
+              <div class="tool-price">~$29/mo</div>
+              <div class="tool-desc">Transcript-driven — reads the actual video and designs thumbnails matching content (not vague prompts). Predictive CTR scoring built in. Zero-prompt philosophy.</div>
+            </div>
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">Nano Banana 2 / Pro</span><span class="tool-tag have">DOCUMENTED</span></div>
+              <div class="tool-price">$0.067/image (1K)</div>
+              <div class="tool-desc">Already documented. Best text rendering of any generative model. $6.70 to generate 100 thumbnail variants. MCP available for Claude Code integration.</div>
+            </div>
+            <div class="tool consider">
+              <div class="tool-head"><span class="tool-name">Ideogram v3</span><span class="tool-tag alt">CONSIDER</span></div>
+              <div class="tool-price">$8–$48/mo</div>
+              <div class="tool-desc">Best for thumbnails with text integrated INTO the image (not overlaid). No manual text addition needed for typography-heavy niches.</div>
+            </div>
+            <div class="tool consider">
+              <div class="tool-head"><span class="tool-name">Pikzels FaceSwap</span><span class="tool-tag alt">CONSIDER</span></div>
+              <div class="tool-price">$19/mo</div>
+              <div class="tool-desc">Drops your face into AI-generated scenes with multiple expressions — solves the "I don't want to do another photo shoot" problem for channels with a face.</div>
+            </div>
+            <div class="tool consider">
+              <div class="tool-head"><span class="tool-name">Adobe Firefly / Photoshop Generative Fill</span><span class="tool-tag alt">CONSIDER</span></div>
+              <div class="tool-price">$23/mo (Photoshop)</div>
+              <div class="tool-desc">Commercially safe (Firefly trained only on licensed content). Generative Fill in Photoshop is the polish layer — fix hands, extend backgrounds, swap elements after AI generates the base.</div>
+            </div>
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">YouTube native Test &amp; Compare</span><span class="tool-tag rec">USE</span></div>
+              <div class="tool-price">Free</div>
+              <div class="tool-desc">YouTube's built-in A/B testing for thumbnails. Free. Always running on every winner. Most channels forget this exists.</div>
+            </div>
+            <div class="tool consider">
+              <div class="tool-head"><span class="tool-name">ThumbnailTest.com</span><span class="tool-tag alt">CONSIDER</span></div>
+              <div class="tool-price">$29–$99/mo</div>
+              <div class="tool-desc">Pre-publish thumbnail testing — gets real human votes before publish. Useful for high-stakes uploads where one shot matters.</div>
+            </div>
+          </div>
+
+          <div class="recommend-box">
+            <div class="label">Recommended Stack</div>
+            <p><strong>1of10 (niche-trained base) + Nano Banana 2 / Pro (custom variants + text rendering) + Photoshop Generative Fill (polish layer) + YouTube native Test &amp; Compare (live A/B every video).</strong> Workflow: 1of10 generates 5 niche-aligned drafts → pick top 2 → regenerate variants in Nano Banana with refined prompts → polish in Photoshop → ship 2 to YouTube's native A/B test on every video. One creator hit 7.1% CTR (from 2.3%) using exactly this stack.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE 6: VIDEO / B-ROLL -->
+    <section id="stage-video">
+      <h2><span class="num-tag">Section 08 · STAGE 6</span><br>Video Generation &amp; B-Roll</h2>
+      <p class="section-intro">
+        The fastest-moving category in the entire stack. AI video generation went from "novelty" to "broadcast-grade for B-roll" in the last 12 months. Sora is being sunset (RIP, Sept 2026). Veo 3.1 and Kling 3.0 took its place. This is where most operators in faceless YouTube are bleeding margin — solve it, and per-video production cost drops from $75 to closer to $30.
+      </p>
+
+      <div class="stage">
+        <div class="head">
+          <div class="stage-num">Stage 06</div>
+          <div class="stage-title">AI Video Generation</div>
+        </div>
+        <div class="body">
+          <div class="tool-grid">
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">Google Veo 3.1</span><span class="tool-tag rec">ADD</span></div>
+              <div class="tool-price">$0.15/sec (fast mode)</div>
+              <div class="tool-desc">Strongest all-rounder. Only true 4K native option. Leads on prompt adherence + native audio sync. Best for establishing shots, narrative B-roll. Use as the workhorse.</div>
+            </div>
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">Kling 3.0</span><span class="tool-tag rec">ADD</span></div>
+              <div class="tool-price">~$0.10/sec</div>
+              <div class="tool-desc">Multi-shot sequences (3–15 sec) with subject consistency across angles — released Feb 2026. Best for scenes that need character continuity. Cheapest of the top tier.</div>
+            </div>
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">Seedance 2.0</span><span class="tool-tag have">DOCUMENTED</span></div>
+              <div class="tool-price">Via Higsfield</div>
+              <div class="tool-desc">Already documented. Winner for narrative content. Multi-shot native + synchronized audio/video from one prompt. Combined with Nano Banana Pro avatars = full hands-free production.</div>
+            </div>
+            <div class="tool consider">
+              <div class="tool-head"><span class="tool-name">Runway Gen-4 / Gen-4.5</span><span class="tool-tag alt">CONSIDER</span></div>
+              <div class="tool-price">$15–$95/mo</div>
+              <div class="tool-desc">Pro favorite for granular creative control — camera moves, motion brush, reference-driven character consistency. Best when a shot needs precise direction. API mature.</div>
+            </div>
+            <div class="tool consider">
+              <div class="tool-head"><span class="tool-name">Luma Ray 2</span><span class="tool-tag alt">CONSIDER</span></div>
+              <div class="tool-price">$15+/mo</div>
+              <div class="tool-desc">Strong image-to-video animation. Use when starting from a generated still and need it to move naturally.</div>
+            </div>
+            <div class="tool consider">
+              <div class="tool-head"><span class="tool-name">Pika 2.0</span><span class="tool-tag alt">CONSIDER</span></div>
+              <div class="tool-price">$10–$58/mo</div>
+              <div class="tool-desc">Best fit for short-form (Shorts/Reels). Less critical for long-form faceless. Skip unless we expand into short-form arm.</div>
+            </div>
+            <div class="tool experimental">
+              <div class="tool-head"><span class="tool-name">Wan 2.1 (open-source)</span><span class="tool-tag exp">EXPERIMENT</span></div>
+              <div class="tool-price">$0 self-hosted</div>
+              <div class="tool-desc">Open-source video gen catching up fast. Run locally for unlimited B-roll generation. Quality not yet at Veo/Kling level but $0 marginal cost.</div>
+            </div>
+          </div>
+
+          <div class="recommend-box">
+            <div class="label">Recommended Stack</div>
+            <p><strong>Veo 3.1 (workhorse) + Kling 3.0 (multi-shot scenes) + Seedance 2.0 via Higsfield (already documented, narrative content) + Storyblocks ($228/yr) for traditional stock backup.</strong> Stop trying to source perfect stock — generate it. Budget ~$200/mo across the three for 30–60 video/month operation. Drops average B-roll labor from ~$30/video to ~$8.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE 7: EDIT / ASSEMBLY -->
+    <section id="stage-edit">
+      <h2><span class="num-tag">Section 09 · STAGE 7</span><br>Video Assembly &amp; Editing</h2>
+      <p class="section-intro">
+        Script → voiceover → B-roll → final 10–15 min video. State of art in May 2026: end-to-end "Agent" tools that interpret the subtext of a script and auto-assemble video with B-roll, transitions, and emotional tone shifts. Some good enough to ship; most still need human polish.
+      </p>
+
+      <div class="stage">
+        <div class="head">
+          <div class="stage-num">Stage 07</div>
+          <div class="stage-title">Long-Form Video Assembly</div>
+        </div>
+        <div class="body">
+          <div class="tool-grid">
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">Pictory 2.0</span><span class="tool-tag rec">ADD</span></div>
+              <div class="tool-price">$23–$119/mo</div>
+              <div class="tool-desc">Best-in-class script-to-video for long-form faceless. 3M+ video clips + 15K music tracks (Storyblocks + Melod.ie) royalty-free baked in. Agent-mode auto-selects B-roll matching script tone.</div>
+            </div>
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">InVideo AI</span><span class="tool-tag rec">ADD</span></div>
+              <div class="tool-price">$25–$60/mo</div>
+              <div class="tool-desc">Text-prompt → complete video with script, VO, stock footage, music, transitions. Best for the "first draft fast" workflow before human editor polish.</div>
+            </div>
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">Descript</span><span class="tool-tag rec">ADD</span></div>
+              <div class="tool-price">$12–$24/user/mo</div>
+              <div class="tool-desc">Transcript-based editing — edit the text, video follows. Best for editors who think in script vs. timeline. Cuts edit time ~50% on talking-head + VO content.</div>
+            </div>
+            <div class="tool consider">
+              <div class="tool-head"><span class="tool-name">CapCut Pro + AI</span><span class="tool-tag alt">CONSIDER</span></div>
+              <div class="tool-price">$8/mo</div>
+              <div class="tool-desc">Cheap, fast, AI features improving fast. Best for editors who already know it. Less powerful than Pictory for full automation, but solid for hybrid workflow.</div>
+            </div>
+            <div class="tool consider">
+              <div class="tool-head"><span class="tool-name">Adobe Premiere Pro + Generative AI</span><span class="tool-tag alt">CONSIDER</span></div>
+              <div class="tool-price">$23/mo</div>
+              <div class="tool-desc">Premiere added Generative Extend, Object Mask, AI-powered editing in 2025-26. Pro editor's tool. Use when a video needs handcraft, not when scaling.</div>
+            </div>
+            <div class="tool consider">
+              <div class="tool-head"><span class="tool-name">DaVinci Resolve (free tier)</span><span class="tool-tag alt">CONSIDER</span></div>
+              <div class="tool-price">Free / $295 one-time</div>
+              <div class="tool-desc">Free tier is excellent. Strong AI features (Studio version). Best for editors who prefer Resolve workflow. Already mentioned in the original Scott Smith stack.</div>
+            </div>
+          </div>
+
+          <div class="recommend-box">
+            <div class="label">Recommended Stack</div>
+            <p><strong>Pictory 2.0 for the first cut (auto-assembly from script + VO) + Descript for editor polish (transcript-based refinement) + Premiere/Resolve as the heavy editor's choice for the 20% of videos that need handcraft.</strong> Pipeline: AI-generated first cut in 10 min → human editor refines in Descript in 30–60 min → publish. Drops total edit labor from ~3 hrs/video to ~1 hr/video.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE 8: ANALYTICS -->
+    <section id="stage-analytics">
+      <h2><span class="num-tag">Section 10 · STAGE 8</span><br>Channel Intelligence &amp; Analytics</h2>
+      <p class="section-intro">
+        Post-upload optimization is where most operators lose the most money. The Scott Smith methodology lives or dies by the CTR/APV diagnostic loop. Augment with multi-channel dashboards, A/B testing automation, and AI-driven analytics interpretation.
+      </p>
+
+      <div class="stage">
+        <div class="head">
+          <div class="stage-num">Stage 08</div>
+          <div class="stage-title">Performance Optimization</div>
+        </div>
+        <div class="body">
+          <div class="tool-grid">
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">VidIQ Boost+ (2026)</span><span class="tool-tag have">CURRENT</span></div>
+              <div class="tool-price">$39/mo</div>
+              <div class="tool-desc">Stronger on ideation + AI-driven coaching in 2026 update. Daily idea feed, niche scoring, structured suggestions. Keep as primary.</div>
+            </div>
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">TubeBuddy Legend (A/B testing)</span><span class="tool-tag rec">ADD</span></div>
+              <div class="tool-price">$27/mo (annual)</div>
+              <div class="tool-desc">2026 winner for A/B testing — titles, thumbnails, descriptions, tags vs. CTR/watch time. Cheaper than VidIQ Max and has features VidIQ doesn't. Use alongside VidIQ, not instead.</div>
+            </div>
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">Spotter Studio</span><span class="tool-tag rec">ADD</span></div>
+              <div class="tool-price">~$59/mo</div>
+              <div class="tool-desc">Channel-level intelligence backed by MrBeast's fund. Best for "what are other channels in this niche doing that we should adopt." Multi-channel competitive monitor.</div>
+            </div>
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">Looker Studio (Google)</span><span class="tool-tag rec">BUILD</span></div>
+              <div class="tool-price">Free</div>
+              <div class="tool-desc">Native YouTube Analytics connector. Build once, deploy per channel. The multi-channel dashboard the original Scott Smith playbook called for — already free, just need to build it.</div>
+            </div>
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">YouTube Test &amp; Compare (native)</span><span class="tool-tag rec">USE</span></div>
+              <div class="tool-price">Free</div>
+              <div class="tool-desc">Built into YouTube Studio. Run on every published video. Free CTR optimization. Most channels don't use it. We should always.</div>
+            </div>
+            <div class="tool experimental">
+              <div class="tool-head"><span class="tool-name">Claude Code analytics agent</span><span class="tool-tag exp">BUILD</span></div>
+              <div class="tool-price">$0 (our infra)</div>
+              <div class="tool-desc">Build a Claude Code skill that ingests weekly YouTube Analytics exports across all channels → produces the Prompt 4-3 report automatically + flags anomalies. Saves Strategist ~2 hrs/week per channel.</div>
+            </div>
+          </div>
+
+          <div class="recommend-box">
+            <div class="label">Recommended Stack</div>
+            <p>VidIQ Boost+ + TubeBuddy Legend + Spotter Studio (~$125/mo total) covers the SaaS layer. Looker Studio dashboard (free, built once) covers multi-channel ops. Claude Code analytics agent (built in-house, ~4 hours) replaces the weekly manual review. Total cost vs. current: +~$85/mo for transformative analytics depth.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE 9: REPURPOSE -->
+    <section id="stage-repurpose">
+      <h2><span class="num-tag">Section 11 · STAGE 9</span><br>Repurposing &amp; Cross-Platform</h2>
+      <p class="section-intro">
+        Every 10–15 minute YouTube video has 3–5 vertical clips inside it. Most operators leave that distribution on the table. We already own the solution.
+      </p>
+
+      <div class="stage">
+        <div class="head">
+          <div class="stage-num">Stage 09</div>
+          <div class="stage-title">Long-Form → Short-Form Repurposing</div>
+        </div>
+        <div class="body">
+          <div class="tool-grid">
+            <div class="tool recommended">
+              <div class="tool-head"><span class="tool-name">Clipify</span><span class="tool-tag have">INSTALLED</span></div>
+              <div class="tool-price">$0</div>
+              <div class="tool-desc">Already installed. Drop video → 3 vertical clips with speaker tracking + opus-style captions. Replaces OpusClip ($95/mo) + Submagic ($67/mo). Run on every YouTube upload.</div>
+            </div>
+            <div class="tool consider">
+              <div class="tool-head"><span class="tool-name">OpusClip (alternative)</span><span class="tool-tag alt">FALLBACK</span></div>
+              <div class="tool-price">$15–$95/mo</div>
+              <div class="tool-desc">Industry standard. Better UI than Clipify but paid. Useful as backup if Clipify breaks or for specific features (AI B-roll insertion on the clip itself).</div>
+            </div>
+            <div class="tool consider">
+              <div class="tool-head"><span class="tool-name">Submagic</span><span class="tool-tag alt">FALLBACK</span></div>
+              <div class="tool-price">$10–$67/mo</div>
+              <div class="tool-desc">Caption-focused. Best when we want premium animated captions vs Clipify's default. Niche use.</div>
+            </div>
+            <div class="tool consider">
+              <div class="tool-head"><span class="tool-name">Postiz / Buffer / Later</span><span class="tool-tag alt">SCHEDULER</span></div>
+              <div class="tool-price">$10–$30/mo</div>
+              <div class="tool-desc">Postiz is the open-source pick. Schedule the 3 vertical clips per video across IG Reels / TikTok / YouTube Shorts on the same day. Distribution multiplier.</div>
+            </div>
+          </div>
+
+          <div class="recommend-box">
+            <div class="label">Recommended Stack</div>
+            <p>Clipify on every YouTube upload + Postiz to schedule the 3 vertical clips across TikTok / IG Reels / YT Shorts. Cost: ~$10/mo. Effort per video: ~5 min. Multiplies channel reach 3–5x by feeding the secondary platforms with no extra production.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOAT -->
+    <section id="moat">
+      <h2><span class="num-tag">Section 12</span><br>The Moat — what makes us the best.</h2>
+      <p class="section-intro">
+        Tools alone don't make us the best. Everyone can buy Veo 3.1 or Nano Banana 2. The moat is the <em>integration</em> — the proprietary workflows + accumulated channel data + in-house Claude skills that no competitor replicates without a year of dev work. Here are the five edges we build.
+      </p>
+
+      <div class="moat-grid">
+        <div class="moat">
+          <div class="moat-num">EDGE 01</div>
+          <h3>Proprietary Prompt Library &amp; Skills</h3>
+          <p>Every prompt, skill, and SOP in our system gets versioned, refined, and accumulated. After 6 months of channel ops, we have prompts no other agency has — tested against thousands of videos. That's the compounding asset.</p>
+        </div>
+        <div class="moat">
+          <div class="moat-num">EDGE 02</div>
+          <h3>Multi-Channel Pattern Library</h3>
+          <p>Running multiple channels in parallel means we accumulate signal faster than solo operators. What works in aviation gets tested in finance. Pattern recognition across niches becomes our compounding edge.</p>
+        </div>
+        <div class="moat">
+          <div class="moat-num">EDGE 03</div>
+          <h3>End-to-End Local Pipeline</h3>
+          <p>Clipify (local), VibeVoice/RVC (local), Nano Banana MCP (local agent + cloud API), Claude Code orchestration. We're not renting SaaS workflows — we own them. Margin advantage at scale.</p>
+        </div>
+        <div class="moat">
+          <div class="moat-num">EDGE 04</div>
+          <h3>Verification &amp; Quality Gates</h3>
+          <p>Scott's "AI is a tool, not a replacement" principle codified into actual checklists: Google Trends gate, Marc's hooks scoring, CTR/APV diagnostic matrix. Every video clears the gates before publishing. Quality is non-negotiable.</p>
+        </div>
+        <div class="moat">
+          <div class="moat-num">EDGE 05</div>
+          <h3>Speed Without Sacrificing Quality</h3>
+          <p>AI-augmented stack runs at 3–5x the velocity of pure-human teams while maintaining ship-ready quality. Two videos per week per channel becomes structurally easy, not a heroic push. That's how we credibly run 10+ channels at once.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section id="roadmap">
+      <h2><span class="num-tag">Section 13</span><br>The 4-week upgrade roadmap.</h2>
+      <p class="section-intro">
+        Concrete, week-by-week. Each week has a clear theme, specific tools to buy/build, and an outcome that compounds into the next week.
+      </p>
+
+      <div class="roadmap">
+
+        <div class="week">
+          <div class="week-label">
+            <h4>WEEK 01</h4>
+            <div class="title">Intelligence Layer</div>
+          </div>
+          <ul>
+            <li>Subscribe to <strong>1of10</strong> + <strong>Spotter Studio</strong> (~$108/mo combined)</li>
+            <li>Test both against the existing 4-prompt loop on one live niche — does their output beat ours?</li>
+            <li>Set up <strong>Looker Studio</strong> dashboard template (free, ~4 hrs to build) with YouTube Analytics connector</li>
+            <li>Document new niche-selection SOP combining Claude/Gemini + 1of10 + Spotter</li>
+            <li><strong>Outcome:</strong> niche briefs are now data-backed against 62B views of outlier data, not just AI brainstorming</li>
+          </ul>
+        </div>
+
+        <div class="week">
+          <div class="week-label">
+            <h4>WEEK 02</h4>
+            <div class="title">Visual Production Layer</div>
+          </div>
+          <ul>
+            <li>Install <strong>Nano Banana 2 MCP</strong> in Claude Code (already documented — <code>~30 min</code> install)</li>
+            <li>Subscribe to <strong>Veo 3.1</strong> (~$50/mo budget tier) + <strong>Kling 3.0</strong> (~$15–$30/mo) for B-roll</li>
+            <li>Subscribe to <strong>1of10 Thumbnails</strong> (already in 1of10 sub) + add <strong>Adobe Photoshop</strong> ($23/mo) for polish layer</li>
+            <li>Build internal thumbnail variant generator: Claude Code skill → Nano Banana → 5 thumbnails per video automatically</li>
+            <li><strong>Outcome:</strong> AI-generated B-roll + AI-generated thumbnails on every video. Drops per-video production cost by ~$25.</li>
+          </ul>
+        </div>
+
+        <div class="week">
+          <div class="week-label">
+            <h4>WEEK 03</h4>
+            <div class="title">Script + Voice Quality Layer</div>
+          </div>
+          <ul>
+            <li>Subscribe to <strong>Subscribr</strong> ($49/mo) for AI script editor + retention QA</li>
+            <li>Add <strong>Cartesia Sonic 3</strong> ($5–$20/mo) alongside ElevenLabs for rapid VO iteration</li>
+            <li>Self-host <strong>Chatterbox</strong> for unlimited overflow VO (experimental, evaluate quality before relying)</li>
+            <li>Update Script Bible SOP to include Marc's <code>hooks</code> skill scoring as a quality gate before sending to writer</li>
+            <li><strong>Outcome:</strong> Scripts get retention-tested before writer touches them. VO costs drop at scale.</li>
+          </ul>
+        </div>
+
+        <div class="week">
+          <div class="week-label">
+            <h4>WEEK 04</h4>
+            <div class="title">Assembly + Analytics Automation</div>
+          </div>
+          <ul>
+            <li>Subscribe to <strong>Pictory 2.0</strong> ($23–$59/mo) for AI script-to-video first cut</li>
+            <li>Add <strong>Descript</strong> ($12/user/mo) for editor polish layer</li>
+            <li>Build <strong>Claude Code analytics agent</strong>: weekly multi-channel performance review automated</li>
+            <li>Add <strong>TubeBuddy Legend</strong> ($27/mo annual) for native A/B testing across all channels</li>
+            <li>Roll out <strong>YouTube native Test &amp; Compare</strong> as default on every video</li>
+            <li>Connect <strong>Clipify → Postiz</strong> pipeline so every YouTube upload automatically clips + schedules to TikTok / IG Reels / Shorts</li>
+            <li><strong>Outcome:</strong> Full pipeline runs at 3–5x current velocity. Analytics reports auto-generated weekly. Cross-platform distribution multiplies reach.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <h3>Total monthly investment</h3>
+      <table class="tbl">
+        <thead>
+          <tr><th>Tool</th><th>Stage</th><th>Monthly Cost</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="first">1of10 (niche + thumbnails)</td><td>Niche / Thumbnails</td><td>~$49</td></tr>
+          <tr><td class="first">Spotter Studio</td><td>Channel intelligence</td><td>~$59</td></tr>
+          <tr><td class="first">Subscribr</td><td>Script QA</td><td>$49</td></tr>
+          <tr><td class="first">Veo 3.1 (budget tier)</td><td>B-roll generation</td><td>~$50</td></tr>
+          <tr><td class="first">Kling 3.0</td><td>Multi-shot scenes</td><td>~$20</td></tr>
+          <tr><td class="first">Nano Banana 2 API</td><td>Thumbnails / images</td><td>~$30 (usage)</td></tr>
+          <tr><td class="first">Photoshop</td><td>Thumbnail polish</td><td>$23</td></tr>
+          <tr><td class="first">Cartesia Sonic 3</td><td>VO drafts</td><td>~$10</td></tr>
+          <tr><td class="first">Pictory 2.0</td><td>Auto-assembly</td><td>~$30</td></tr>
+          <tr><td class="first">Descript</td><td>Editor polish</td><td>$12</td></tr>
+          <tr><td class="first">TubeBuddy Legend</td><td>A/B testing</td><td>$27</td></tr>
+          <tr><td class="first">Postiz</td><td>Cross-platform scheduler</td><td>~$10</td></tr>
+          <tr><td class="first" colspan="2"><strong>New incremental spend</strong></td><td><strong>~$369/mo</strong></td></tr>
+          <tr><td class="first" colspan="2"><strong>Existing stack from original playbook</strong></td><td>~$116/mo</td></tr>
+          <tr><td class="first" colspan="2"><strong>Total best-in-class stack</strong></td><td><strong>~$485/mo</strong></td></tr>
+        </tbody>
+      </table>
+
+      <div class="recommend-box">
+        <div class="label">The math</div>
+        <p>+$369/mo to upgrade from "Scott Smith standard" to "best-in-class May 2026." At 5 active channels generating $5–15K each at maturity, that incremental spend is &lt;1% of revenue. The win is the 3–5x speed advantage + quality floor that lets us credibly run 10+ channels with the same team — that's where the agency moat is built.</p>
+      </div>
+    </section>
+
+    <!-- CLOSING -->
+    <section>
+      <h2>Bottom line.</h2>
+      <p class="lead">
+        The Scott Smith methodology is the operating system. This report is the upgrade.
+      </p>
+      <p class="lead">
+        We already own ~30% of the best-in-class stack — Clipify, Nano Banana 2 documentation, Seedance workflows, Marc Cleroux skills, the ElevenLabs setup. Closing the other 70% costs ~$369/mo and 4 weeks of focused buildout.
+      </p>
+      <p class="lead" style="color: var(--accent-2); font-weight: 600;">
+        The moat isn't the tools. It's the integration. Run the 4-week roadmap and we credibly claim "best at growing YouTube pages" by end of June.
+      </p>
+    </section>
+
+    <!-- FOOTER -->
+    <section class="footer-section">
+      <p>Compiled May 11, 2026 · Internal team report<br>
+      Sources: Library of Alexandria (Rising Tides knowledge base) + live market research<br>
+      Companion to: <code>Scott-Smith-Team-Playbook.html</code></p>
+    </section>
+
+  </div>
+</div>
+</body>
+</html>

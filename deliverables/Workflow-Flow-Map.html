@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube Growth Pipeline — Visual Flow Map</title>
+<style>
+:root {
+  --bg: #0b0e13;
+  --bg-2: #131720;
+  --canvas: #0e1218;
+  --panel: #1a212c;
+  --panel-2: #1f2832;
+  --ink: #f0f4f9;
+  --ink-2: #b7c2d0;
+  --ink-3: #7d8a99;
+  --line: #2a3340;
+
+  --node-trigger: #ff6d5a;
+  --node-ai: #6266ff;
+  --node-human: #5ee3a1;
+  --node-gate: #ffb84d;
+  --node-output: #4fd1c5;
+  --node-specialist: #ff4d8d;
+  --node-data: #b481ff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "SF Pro Text", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ===== Top bar ===== */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(11, 14, 19, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.topbar .title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.topbar .eyebrow {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--node-trigger);
+  font-weight: 700;
+}
+
+.topbar h1 {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--ink);
+}
+
+.topbar .legend {
+  margin-left: auto;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: var(--ink-2);
+  font-weight: 500;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.stage-jumps {
+  display: flex;
+  gap: 6px;
+  margin-left: 18px;
+  flex-wrap: wrap;
+}
+
+.stage-jumps a {
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  color: var(--ink-2);
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  transition: all 0.15s ease;
+}
+
+.stage-jumps a:hover {
+  background: var(--panel-2);
+  color: var(--ink);
+  border-color: rgba(255, 109, 90, 0.4);
+}
+
+/* ===== Canvas ===== */
+.canvas {
+  background: var(--canvas);
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 32px 32px;
+  min-height: calc(100vh - 60px);
+  padding: 40px 48px 80px;
+}
+
+.canvas-intro {
+  max-width: 900px;
+  margin: 0 auto 48px;
+  text-align: center;
+  padding: 0 16px;
+}
+
+.canvas-intro h2 {
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #fff 0%, #b7c2d0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.05;
+}
+
+.canvas-intro p {
+  font-size: 16px;
+  color: var(--ink-2);
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* ===== Stage lane ===== */
+.stage-lane {
+  margin-bottom: 56px;
+  background:
+    linear-gradient(to right, rgba(255,109,90,0.04), transparent 35%),
+    var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.stage-lane.loop {
+  background:
+    linear-gradient(to right, rgba(255,184,77,0.08), transparent 35%),
+    var(--bg-2);
+  border-color: rgba(255,184,77,0.3);
+}
+
+.stage-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 28px;
+  background: rgba(0,0,0,0.18);
+  border-bottom: 1px solid var(--line);
+}
+
+.stage-num-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, var(--node-trigger), #e64e3b);
+  border-radius: 14px;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -1px;
+  box-shadow: 0 6px 18px rgba(255,109,90,0.25);
+  flex-shrink: 0;
+}
+
+.stage-lane.loop .stage-num-badge {
+  background: linear-gradient(135deg, var(--node-gate), #e89a2b);
+  box-shadow: 0 6px 18px rgba(255,184,77,0.25);
+}
+
+.stage-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stage-eyebrow {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 800;
+  color: var(--node-trigger);
+}
+
+.stage-lane.loop .stage-eyebrow { color: var(--node-gate); }
+
+.stage-title-block h3 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--ink);
+}
+
+.stage-owner-tag {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.stage-owner-tag strong { color: var(--ink); }
+
+/* ===== Flow area ===== */
+.flow-wrap {
+  padding: 28px 0;
+  overflow-x: auto;
+}
+
+.flow {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  flex-wrap: nowrap;
+  padding: 0 28px;
+  min-width: min-content;
+}
+
+/* ===== Node ===== */
+.node {
+  flex-shrink: 0;
+  width: 230px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px 18px;
+  position: relative;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+
+.node:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.node .node-icon {
+  font-size: 22px;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.node .node-type {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.node .node-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.2px;
+  line-height: 1.3;
+  margin-bottom: 7px;
+}
+
+.node .node-meta {
+  font-size: 12px;
+  color: var(--ink-3);
+  line-height: 1.5;
+}
+
+.node .node-meta strong { color: var(--ink-2); font-weight: 600; }
+
+.node-tools {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.node-tools .pill {
+  font-size: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 3px 7px;
+  color: var(--ink-2);
+  font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+}
+
+/* ===== Node type accents ===== */
+.node.trigger { border-top: 3px solid var(--node-trigger); }
+.node.trigger .node-type { color: var(--node-trigger); }
+.node.trigger:hover { border-color: var(--node-trigger); }
+
+.node.ai { border-top: 3px solid var(--node-ai); }
+.node.ai .node-type { color: var(--node-ai); }
+.node.ai:hover { border-color: var(--node-ai); }
+
+.node.human { border-top: 3px solid var(--node-human); }
+.node.human .node-type { color: var(--node-human); }
+.node.human:hover { border-color: var(--node-human); }
+
+.node.gate { border-top: 3px solid var(--node-gate); }
+.node.gate .node-type { color: var(--node-gate); }
+.node.gate:hover { border-color: var(--node-gate); }
+
+.node.output { border-top: 3px solid var(--node-output); }
+.node.output .node-type { color: var(--node-output); }
+.node.output:hover { border-color: var(--node-output); }
+
+.node.specialist { border-top: 3px solid var(--node-specialist); }
+.node.specialist .node-type { color: var(--node-specialist); }
+.node.specialist:hover { border-color: var(--node-specialist); }
+
+.node.data { border-top: 3px solid var(--node-data); }
+.node.data .node-type { color: var(--node-data); }
+.node.data:hover { border-color: var(--node-data); }
+
+/* HIRE tag on specialist */
+.node.specialist::before {
+  content: "HIRE";
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  background: var(--node-specialist);
+  color: #0a0c0f;
+  padding: 3px 8px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(255,77,141,0.35);
+}
+
+/* ===== Connector ===== */
+.connector {
+  flex-shrink: 0;
+  align-self: center;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--line), rgba(255,255,255,0.2));
+  position: relative;
+}
+
+.connector::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 9px solid rgba(255,255,255,0.3);
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+
+.connector.gate-c {
+  background: linear-gradient(90deg, var(--line), var(--node-gate));
+}
+.connector.gate-c::after { border-left-color: var(--node-gate); }
+
+.connector.specialist-c {
+  background: linear-gradient(90deg, var(--line), var(--node-specialist));
+}
+.connector.specialist-c::after { border-left-color: var(--node-specialist); }
+
+.connector.output-c {
+  background: linear-gradient(90deg, var(--line), var(--node-output));
+}
+.connector.output-c::after { border-left-color: var(--node-output); }
+
+/* ===== Loop back banner ===== */
+.loop-banner {
+  margin: 16px 28px 24px;
+  background: rgba(255, 184, 77, 0.08);
+  border: 1px dashed rgba(255, 184, 77, 0.4);
+  border-radius: 10px;
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 13.5px;
+  color: var(--node-gate);
+}
+
+.loop-banner .loop-icon {
+  font-size: 22px;
+}
+
+.loop-banner strong { color: var(--ink); }
+
+/* ===== Stage divider ===== */
+.stage-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: -28px 0 -28px;
+  position: relative;
+  z-index: 1;
+}
+
+.stage-divider::before,
+.stage-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.stage-divider .arrow-down {
+  width: 32px;
+  height: 32px;
+  background: var(--panel);
+  border: 2px solid var(--node-trigger);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 16px;
+  color: var(--node-trigger);
+  font-weight: 800;
+  font-size: 16px;
+}
+
+/* ===== Footer note ===== */
+.footer-note {
+  max-width: 900px;
+  margin: 80px auto 0;
+  padding: 28px 32px;
+  background: rgba(94, 227, 161, 0.05);
+  border: 1px solid rgba(94, 227, 161, 0.2);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.footer-note h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--node-human);
+  letter-spacing: -0.3px;
+  margin-bottom: 10px;
+}
+
+.footer-note p {
+  font-size: 14.5px;
+  color: var(--ink-2);
+  line-height: 1.6;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1100px) {
+  .topbar { flex-wrap: wrap; padding: 14px 20px; }
+  .topbar .legend { width: 100%; margin-left: 0; gap: 12px; }
+  .stage-jumps { margin-left: 0; }
+  .canvas { padding: 32px 16px 64px; }
+  .canvas-intro h2 { font-size: 28px; }
+  .stage-header { padding: 18px 20px; flex-wrap: wrap; gap: 12px; }
+  .stage-num-badge { width: 44px; height: 44px; font-size: 18px; border-radius: 10px; }
+  .stage-title-block h3 { font-size: 18px; }
+  .stage-owner-tag { margin-left: 0; width: 100%; text-align: center; }
+  .flow { padding: 0 20px; }
+  .footer-note { margin: 60px 16px 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="title-block">
+    <div class="eyebrow">YOUTUBE PIPELINE · A→Z VISUAL FLOW</div>
+    <h1>End-to-End Workflow Map</h1>
+  </div>
+  <div class="stage-jumps">
+    <a href="#s1">01</a>
+    <a href="#s2">02</a>
+    <a href="#s3">03</a>
+    <a href="#s4">04</a>
+    <a href="#s5">05</a>
+    <a href="#s6">06</a>
+    <a href="#s7">07</a>
+    <a href="#s8">08</a>
+    <a href="#s9">09</a>
+    <a href="#s10">10</a>
+  </div>
+  <div class="legend">
+    <div class="legend-row"><span class="legend-dot" style="background: var(--node-trigger);"></span> Trigger</div>
+    <div class="legend-row"><span class="legend-dot" style="background: var(--node-ai);"></span> AI Tool</div>
+    <div class="legend-row"><span class="legend-dot" style="background: var(--node-human);"></span> Team</div>
+    <div class="legend-row"><span class="legend-dot" style="background: var(--node-specialist);"></span> Hire</div>
+    <div class="legend-row"><span class="legend-dot" style="background: var(--node-gate);"></span> Gate</div>
+    <div class="legend-row"><span class="legend-dot" style="background: var(--node-output);"></span> Output</div>
+    <div class="legend-row"><span class="legend-dot" style="background: var(--node-data);"></span> Data</div>
+  </div>
+</header>
+
+<!-- CANVAS -->
+<main class="canvas">
+
+  <div class="canvas-intro">
+    <h2>10 stages. 36 nodes. One pipeline.</h2>
+    <p>This is the entire YouTube growth workflow from "pick a niche" to "publish + repurpose" — every node, every tool, every owner. Each stage flows left to right. Scroll horizontally inside any stage to see the full flow. The whole pipeline runs top to bottom.</p>
+  </div>
+
+  <!-- STAGE 1 -->
+  <section class="stage-lane" id="s1">
+    <div class="stage-header">
+      <div class="stage-num-badge">01</div>
+      <div class="stage-title-block">
+        <div class="stage-eyebrow">Foundation</div>
+        <h3>Niche Selection</h3>
+      </div>
+      <div class="stage-owner-tag">Owner: <strong>Strategist</strong></div>
+    </div>
+    <div class="flow-wrap">
+      <div class="flow">
+        <div class="node trigger">
+          <div class="node-icon">⚡</div>
+          <div class="node-type">Trigger</div>
+          <div class="node-title">New Channel Launch</div>
+          <div class="node-meta">Decision to spin up channel N+1 or onboard a new client</div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">🧠</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Niche Brainstorm</div>
+          <div class="node-meta">20 candidates scored RPM × demand × gap</div>
+          <div class="node-tools"><span class="pill">Claude Opus</span><span class="pill">Prompt 1A</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">📊</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Outlier Intelligence</div>
+          <div class="node-meta">Cross-check against 62B-view outlier data + channel intel</div>
+          <div class="node-tools"><span class="pill">1of10</span><span class="pill">Spotter Studio</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node human">
+          <div class="node-icon">👤</div>
+          <div class="node-type">Team Member</div>
+          <div class="node-title">Trends Verify</div>
+          <div class="node-meta">Strategist confirms: rising / stable / declining</div>
+          <div class="node-tools"><span class="pill">Google Trends</span></div>
+        </div>
+        <div class="connector gate-c"></div>
+        <div class="node gate">
+          <div class="node-icon">🚦</div>
+          <div class="node-type">Quality Gate</div>
+          <div class="node-title">$7+ RPM Verified?</div>
+          <div class="node-meta">≥$7 RPM · rising trend · &lt;50 mature competitors</div>
+        </div>
+        <div class="connector output-c"></div>
+        <div class="node output">
+          <div class="node-icon">📄</div>
+          <div class="node-type">Output</div>
+          <div class="node-title">Niche Brief</div>
+          <div class="node-meta">Locked niche + top 10 competitor channel list</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stage-divider"><span class="arrow-down">↓</span></div>
+
+  <!-- STAGE 2 -->
+  <section class="stage-lane" id="s2">
+    <div class="stage-header">
+      <div class="stage-num-badge">02</div>
+      <div class="stage-title-block">
+        <div class="stage-eyebrow">Ideation</div>
+        <h3>Topic Discovery — The 4-Prompt Loop</h3>
+      </div>
+      <div class="stage-owner-tag">Owner: <strong>Researcher</strong></div>
+    </div>
+    <div class="flow-wrap">
+      <div class="flow">
+        <div class="node data">
+          <div class="node-icon">📥</div>
+          <div class="node-type">Data In</div>
+          <div class="node-title">Competitor Screenshots</div>
+          <div class="node-meta">Top channel's Videos tab — 40 most recent uploads</div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">🤖</div>
+          <div class="node-type">AI · Prompt 1</div>
+          <div class="node-title">Data Extraction</div>
+          <div class="node-meta">Screenshot → markdown table of titles + views + dates</div>
+          <div class="node-tools"><span class="pill">Claude</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">🤖</div>
+          <div class="node-type">AI · Prompt 2</div>
+          <div class="node-title">Pattern Analysis</div>
+          <div class="node-meta">What works, what fails, topic clusters, hook frequency</div>
+          <div class="node-tools"><span class="pill">Claude</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">🤖</div>
+          <div class="node-type">AI · Prompt 3</div>
+          <div class="node-title">Build Research Prompt</div>
+          <div class="node-meta">Claude writes the Gemini-specific deep-research prompt</div>
+          <div class="node-tools"><span class="pill">Claude</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">🌐</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Gemini Deep Research</div>
+          <div class="node-meta">15–20 trending topics + news + calendar events</div>
+          <div class="node-tools"><span class="pill">Gemini 2.5 Pro</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">🤖</div>
+          <div class="node-type">AI · Prompt 4</div>
+          <div class="node-title">Topic Ranking</div>
+          <div class="node-meta">5 ranked topics + title variations + difficulty + view ceiling</div>
+          <div class="node-tools"><span class="pill">Claude</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node human">
+          <div class="node-icon">👤</div>
+          <div class="node-type">Team Member</div>
+          <div class="node-title">Trends Verify Topics</div>
+          <div class="node-meta">Researcher kills any flat/declining topics manually</div>
+          <div class="node-tools"><span class="pill">Google Trends</span></div>
+        </div>
+        <div class="connector gate-c"></div>
+        <div class="node gate">
+          <div class="node-icon">🚦</div>
+          <div class="node-type">Quality Gate</div>
+          <div class="node-title">Strategist Approval</div>
+          <div class="node-meta">Locks final 2–3 topics for this week</div>
+        </div>
+        <div class="connector output-c"></div>
+        <div class="node output">
+          <div class="node-icon">📄</div>
+          <div class="node-type">Output</div>
+          <div class="node-title">Topic Brief</div>
+          <div class="node-meta">2–3 validated titles, ready for scripting</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stage-divider"><span class="arrow-down">↓</span></div>
+
+  <!-- STAGE 3 -->
+  <section class="stage-lane" id="s3">
+    <div class="stage-header">
+      <div class="stage-num-badge">03</div>
+      <div class="stage-title-block">
+        <div class="stage-eyebrow">Writing</div>
+        <h3>Script Creation — Bible → Outline → Writer</h3>
+      </div>
+      <div class="stage-owner-tag">Owner: <strong>Script Producer</strong></div>
+    </div>
+    <div class="flow-wrap">
+      <div class="flow">
+        <div class="node data">
+          <div class="node-icon">📥</div>
+          <div class="node-type">Data In</div>
+          <div class="node-title">10 Competitor Transcripts</div>
+          <div class="node-meta">Pulled via YouTube transcript copy or vidIQ batch</div>
+          <div class="node-tools"><span class="pill">vidIQ</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">📖</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Script Bible</div>
+          <div class="node-meta">Hook patterns + arc + tone + retention engineering — reusable per niche</div>
+          <div class="node-tools"><span class="pill">Claude Opus</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">📝</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Outline Generation</div>
+          <div class="node-meta">Section beats + research to weave in + writer notes</div>
+          <div class="node-tools"><span class="pill">Gemini</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">🎣</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Hook Scoring</div>
+          <div class="node-meta">Score openings vs. proven viral hook database</div>
+          <div class="node-tools"><span class="pill">/hooks skill</span></div>
+        </div>
+        <div class="connector output-c"></div>
+        <div class="node output">
+          <div class="node-icon">📦</div>
+          <div class="node-type">Output</div>
+          <div class="node-title">Script Pack</div>
+          <div class="node-meta">Bible + outline + research + hook score</div>
+        </div>
+        <div class="connector specialist-c"></div>
+        <div class="node specialist">
+          <div class="node-icon">✍️</div>
+          <div class="node-type">Specialist</div>
+          <div class="node-title">Script Writer</div>
+          <div class="node-meta">Human writes final 10–15 min script. $25–$75/script. 3–4 contractors.</div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">🔍</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Retention QA</div>
+          <div class="node-meta">Subscribr analyzes pacing + hooks + drop-off → rewrite notes</div>
+          <div class="node-tools"><span class="pill">Subscribr</span></div>
+        </div>
+        <div class="connector gate-c"></div>
+        <div class="node gate">
+          <div class="node-icon">🚦</div>
+          <div class="node-type">Quality Gate</div>
+          <div class="node-title">Strategist Approval</div>
+          <div class="node-meta">Final script clears gate or goes back to writer</div>
+        </div>
+        <div class="connector output-c"></div>
+        <div class="node output">
+          <div class="node-icon">📄</div>
+          <div class="node-type">Output</div>
+          <div class="node-title">Final Script</div>
+          <div class="node-meta">~1,500–2,200 words · VO-ready</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stage-divider"><span class="arrow-down">↓</span></div>
+
+  <!-- STAGE 4 -->
+  <section class="stage-lane" id="s4">
+    <div class="stage-header">
+      <div class="stage-num-badge">04</div>
+      <div class="stage-title-block">
+        <div class="stage-eyebrow">Audio</div>
+        <h3>Voiceover Production</h3>
+      </div>
+      <div class="stage-owner-tag">Owner: <strong>Script Producer / Editor</strong></div>
+    </div>
+    <div class="flow-wrap">
+      <div class="flow">
+        <div class="node data">
+          <div class="node-icon">📥</div>
+          <div class="node-type">Data In</div>
+          <div class="node-title">Final Script</div>
+          <div class="node-meta">From Stage 03</div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">⚡</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Draft VO (Fast)</div>
+          <div class="node-meta">Rapid iteration takes — test hooks, pacing, alts</div>
+          <div class="node-tools"><span class="pill">Cartesia Sonic 3</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node human">
+          <div class="node-icon">👤</div>
+          <div class="node-type">Team Member</div>
+          <div class="node-title">Take Selection</div>
+          <div class="node-meta">Producer picks best hook + tone direction</div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">🎙️</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Final VO Render</div>
+          <div class="node-meta">Production-quality long-form. Best breath + prosody.</div>
+          <div class="node-tools"><span class="pill">ElevenLabs v3</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">💾</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Overflow / Backup</div>
+          <div class="node-meta">Self-hosted unlimited at scale (when ElevenLabs caps)</div>
+          <div class="node-tools"><span class="pill">Chatterbox</span><span class="pill">VibeVoice</span></div>
+        </div>
+        <div class="connector output-c"></div>
+        <div class="node output">
+          <div class="node-icon">🔊</div>
+          <div class="node-type">Output</div>
+          <div class="node-title">Final VO File</div>
+          <div class="node-meta">.wav / .mp3 ready for editor</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stage-divider"><span class="arrow-down">↓</span></div>
+
+  <!-- STAGE 5 -->
+  <section class="stage-lane" id="s5">
+    <div class="stage-header">
+      <div class="stage-num-badge">05</div>
+      <div class="stage-title-block">
+        <div class="stage-eyebrow">Visuals</div>
+        <h3>Thumbnail Production</h3>
+      </div>
+      <div class="stage-owner-tag">Owner: <strong>Thumbnail Designer</strong></div>
+    </div>
+    <div class="flow-wrap">
+      <div class="flow">
+        <div class="node data">
+          <div class="node-icon">📥</div>
+          <div class="node-type">Data In</div>
+          <div class="node-title">Final Title</div>
+          <div class="node-meta">From Stage 03</div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">🎯</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Niche-Trained Base</div>
+          <div class="node-meta">Reads transcript → generates thumbnails matching niche winners</div>
+          <div class="node-tools"><span class="pill">1of10</span><span class="pill">Braiv</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">🍌</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Custom Variants</div>
+          <div class="node-meta">Bulk variants with perfect text rendering. $0.07/image.</div>
+          <div class="node-tools"><span class="pill">Nano Banana 2</span><span class="pill">Ideogram v3</span></div>
+        </div>
+        <div class="connector specialist-c"></div>
+        <div class="node specialist">
+          <div class="node-icon">🎨</div>
+          <div class="node-type">Specialist</div>
+          <div class="node-title">Designer Polish</div>
+          <div class="node-meta">Photoshop Generative Fill. Picks best 2–3 variants.</div>
+          <div class="node-tools"><span class="pill">Photoshop</span><span class="pill">Canva Pro</span></div>
+        </div>
+        <div class="connector gate-c"></div>
+        <div class="node gate">
+          <div class="node-icon">🚦</div>
+          <div class="node-type">Quality Gate</div>
+          <div class="node-title">Strategist Approval</div>
+          <div class="node-meta">Approves 2–3 variants for YT native A/B test</div>
+        </div>
+        <div class="connector output-c"></div>
+        <div class="node output">
+          <div class="node-icon">🖼️</div>
+          <div class="node-type">Output</div>
+          <div class="node-title">2–3 Variants</div>
+          <div class="node-meta">Ready for YouTube native Test &amp; Compare</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stage-divider"><span class="arrow-down">↓</span></div>
+
+  <!-- STAGE 6 -->
+  <section class="stage-lane" id="s6">
+    <div class="stage-header">
+      <div class="stage-num-badge">06</div>
+      <div class="stage-title-block">
+        <div class="stage-eyebrow">Production</div>
+        <h3>B-Roll &amp; Visual Asset Generation</h3>
+      </div>
+      <div class="stage-owner-tag">Owner: <strong>Editor + AI Pipeline</strong></div>
+    </div>
+    <div class="flow-wrap">
+      <div class="flow">
+        <div class="node data">
+          <div class="node-icon">📥</div>
+          <div class="node-type">Data In</div>
+          <div class="node-title">Script + VO</div>
+          <div class="node-meta">From Stages 03 + 04</div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">📋</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Shot List</div>
+          <div class="node-meta">Claude reads script → suggests 30–50 B-roll shots scene by scene</div>
+          <div class="node-tools"><span class="pill">Claude</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">🎬</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Workhorse Video Gen</div>
+          <div class="node-meta">Establishing shots + narrative B-roll. 4K native.</div>
+          <div class="node-tools"><span class="pill">Veo 3.1</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">🎞️</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Multi-Shot Scenes</div>
+          <div class="node-meta">Character/subject continuity across angles</div>
+          <div class="node-tools"><span class="pill">Kling 3.0</span><span class="pill">Seedance</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">📚</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Stock Fallback</div>
+          <div class="node-meta">When AI gen isn't the right tool</div>
+          <div class="node-tools"><span class="pill">Storyblocks</span><span class="pill">Envato</span></div>
+        </div>
+        <div class="connector output-c"></div>
+        <div class="node output">
+          <div class="node-icon">📁</div>
+          <div class="node-type">Output</div>
+          <div class="node-title">B-Roll Asset Pack</div>
+          <div class="node-meta">Organized folder · timed to script sections</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stage-divider"><span class="arrow-down">↓</span></div>
+
+  <!-- STAGE 7 -->
+  <section class="stage-lane" id="s7">
+    <div class="stage-header">
+      <div class="stage-num-badge">07</div>
+      <div class="stage-title-block">
+        <div class="stage-eyebrow">Assembly</div>
+        <h3>Video Assembly &amp; Edit</h3>
+      </div>
+      <div class="stage-owner-tag">Owner: <strong>Video Editor</strong></div>
+    </div>
+    <div class="flow-wrap">
+      <div class="flow">
+        <div class="node data">
+          <div class="node-icon">📥</div>
+          <div class="node-type">Data In</div>
+          <div class="node-title">Script + VO + B-Roll</div>
+          <div class="node-meta">From Stages 03–06</div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">⚙️</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">First Cut Auto-Assembly</div>
+          <div class="node-meta">Agent reads script tone + builds first draft with B-roll + transitions</div>
+          <div class="node-tools"><span class="pill">Pictory 2.0</span><span class="pill">InVideo AI</span></div>
+        </div>
+        <div class="connector specialist-c"></div>
+        <div class="node specialist">
+          <div class="node-icon">🎬</div>
+          <div class="node-type">Specialist</div>
+          <div class="node-title">Editor Polish</div>
+          <div class="node-meta">Transcript-based edit. Cuts, captions, timing. 30–60 min. $25–$50/video.</div>
+          <div class="node-tools"><span class="pill">Descript</span><span class="pill">Premiere</span></div>
+        </div>
+        <div class="connector gate-c"></div>
+        <div class="node gate">
+          <div class="node-icon">🚦</div>
+          <div class="node-type">Quality Gate</div>
+          <div class="node-title">Pre-Upload Checklist</div>
+          <div class="node-meta">6 gates: Topic / Title / Thumbnail / Script / Production / Upload</div>
+        </div>
+        <div class="connector output-c"></div>
+        <div class="node output">
+          <div class="node-icon">🎥</div>
+          <div class="node-type">Output</div>
+          <div class="node-title">Master Video</div>
+          <div class="node-meta">10–15 min 1080p MP4 · ready to upload</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stage-divider"><span class="arrow-down">↓</span></div>
+
+  <!-- STAGE 8 -->
+  <section class="stage-lane" id="s8">
+    <div class="stage-header">
+      <div class="stage-num-badge">08</div>
+      <div class="stage-title-block">
+        <div class="stage-eyebrow">Launch</div>
+        <h3>Publish &amp; Test</h3>
+      </div>
+      <div class="stage-owner-tag">Owner: <strong>Publisher</strong></div>
+    </div>
+    <div class="flow-wrap">
+      <div class="flow">
+        <div class="node human">
+          <div class="node-icon">👤</div>
+          <div class="node-type">Team Member</div>
+          <div class="node-title">Upload to YT Studio</div>
+          <div class="node-meta">Title, description, hashtags, tags from vidIQ</div>
+          <div class="node-tools"><span class="pill">YT Studio</span><span class="pill">vidIQ</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">🧪</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Native A/B Test</div>
+          <div class="node-meta">Run 2–3 thumbnail variants via YT Test &amp; Compare</div>
+          <div class="node-tools"><span class="pill">YouTube native</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">🧪</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Cross-Channel A/B</div>
+          <div class="node-meta">TubeBuddy tests title + description + tags vs CTR/watch time</div>
+          <div class="node-tools"><span class="pill">TubeBuddy</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node human">
+          <div class="node-icon">⏰</div>
+          <div class="node-type">Team Member</div>
+          <div class="node-title">Schedule + Publish</div>
+          <div class="node-meta">US prime time 4–9 PM ET typical</div>
+        </div>
+        <div class="connector output-c"></div>
+        <div class="node output">
+          <div class="node-icon">🚀</div>
+          <div class="node-type">Output</div>
+          <div class="node-title">Video Live</div>
+          <div class="node-meta">URL shared in #yt-production</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stage-divider"><span class="arrow-down">↓</span></div>
+
+  <!-- STAGE 9 -->
+  <section class="stage-lane loop" id="s9">
+    <div class="stage-header">
+      <div class="stage-num-badge">09</div>
+      <div class="stage-title-block">
+        <div class="stage-eyebrow">Optimization · The Loop</div>
+        <h3>Measure &amp; Optimize</h3>
+      </div>
+      <div class="stage-owner-tag">Owner: <strong>Strategist + AI Agent</strong></div>
+    </div>
+    <div class="flow-wrap">
+      <div class="flow">
+        <div class="node trigger">
+          <div class="node-icon">⏱️</div>
+          <div class="node-type">Trigger</div>
+          <div class="node-title">24-Hour Check</div>
+          <div class="node-meta">CTR + APV initial signal — algorithm test traffic</div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">📊</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Analytics Agent</div>
+          <div class="node-meta">Auto-generates the weekly Prompt 4-3 report</div>
+          <div class="node-tools"><span class="pill">Claude Code</span><span class="pill">Looker</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">🔍</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">CTR / APV Diagnostic</div>
+          <div class="node-meta">Matrix: HIGH/LOW × HIGH/LOW → thumbnail / script / topic failure</div>
+          <div class="node-tools"><span class="pill">Claude</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node human">
+          <div class="node-icon">👤</div>
+          <div class="node-type">Team Member</div>
+          <div class="node-title">Strategist Decision</div>
+          <div class="node-meta">Double down on winners · cut the fat on failures</div>
+        </div>
+        <div class="connector output-c"></div>
+        <div class="node output">
+          <div class="node-icon">📈</div>
+          <div class="node-type">Output</div>
+          <div class="node-title">Weekly Report</div>
+          <div class="node-meta">Sent Friday · feeds next-week's Topic Brief</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="loop-banner">
+      <span class="loop-icon">↻</span>
+      <span><strong>LOOP BACK</strong> — The Weekly Report feeds Stage 02 (Topic Ideation) for the next batch. This is the flywheel — the channel learns from every video and the team gets smarter every week.</span>
+    </div>
+  </section>
+
+  <div class="stage-divider"><span class="arrow-down">↓</span></div>
+
+  <!-- STAGE 10 -->
+  <section class="stage-lane" id="s10">
+    <div class="stage-header">
+      <div class="stage-num-badge">10</div>
+      <div class="stage-title-block">
+        <div class="stage-eyebrow">Distribution</div>
+        <h3>Repurpose — Long → Short</h3>
+      </div>
+      <div class="stage-owner-tag">Owner: <strong>Publisher</strong></div>
+    </div>
+    <div class="flow-wrap">
+      <div class="flow">
+        <div class="node data">
+          <div class="node-icon">📥</div>
+          <div class="node-type">Data In</div>
+          <div class="node-title">Master Video</div>
+          <div class="node-meta">From Stage 07 (post-publish)</div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">✂️</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Clipify Auto-Clip</div>
+          <div class="node-meta">Drop video → 3 vertical clips with speaker tracking + opus captions. Local. Free.</div>
+          <div class="node-tools"><span class="pill">/clipify</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="node human">
+          <div class="node-icon">👤</div>
+          <div class="node-type">Team Member</div>
+          <div class="node-title">Publisher Review</div>
+          <div class="node-meta">Pick best 2–3 clips · write captions · set platform variants</div>
+        </div>
+        <div class="connector"></div>
+        <div class="node ai">
+          <div class="node-icon">📡</div>
+          <div class="node-type">AI Tool</div>
+          <div class="node-title">Cross-Platform Scheduler</div>
+          <div class="node-meta">Same day: TikTok + IG Reels + YouTube Shorts</div>
+          <div class="node-tools"><span class="pill">Postiz</span></div>
+        </div>
+        <div class="connector output-c"></div>
+        <div class="node output">
+          <div class="node-icon">🌐</div>
+          <div class="node-type">Output</div>
+          <div class="node-title">3 Platforms Live</div>
+          <div class="node-meta">3–5x reach multiplier from same production effort</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER NOTE -->
+  <div class="footer-note">
+    <h3>The team's job in this pipeline</h3>
+    <p>
+      Own the niche strategy · run the 3 critical gates (Niche Verified, Strategist Approval at Topic + Script, Pre-Upload Checklist) · interpret analytics · decide what to double down on.<br>
+      <strong>The AI does the grinding. Specialists handle the artistry — final scripts, thumbnail polish, editor finesse — where AI can't quite replicate yet.</strong>
+    </p>
+  </div>
+
+</main>
+
+</body>
+</html>
