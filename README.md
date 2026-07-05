@@ -18,6 +18,7 @@ A complete A-to-Z playbook covering:
 4. **The tools** — full 2026 AI stack (Claude, Gemini, Veo 3.1, Kling 3.0, ElevenLabs, Nano Banana 2, 1of10, Spotter Studio, Pictory, Descript, Clipify, Postiz, and more)
 5. **The quality gates** — CTR/APV diagnostic matrix, pre-upload checklist, decision frameworks
 6. **The workflow map** — n8n-style visual flow showing every node, owner, and tool
+7. **The format registry** — 10 reverse-engineered long-form animation master prompts (each dissected from a proven, monetized channel) and how the team accesses them — see `docs/07-longform-master-prompt-registry.md`
 
 This is what a serious YouTube growth operation looks like in 2026. AI-augmented at every step, with humans owning strategy, gates, and judgment calls.
 
@@ -38,7 +39,8 @@ youtube-growth-playbook/
 │   ├── 03-tool-stack.md       ← every tool, cost, who uses it
 │   ├── 04-prompt-library.md   ← all 14 prompts in one doc
 │   ├── 05-quality-gates.md    ← CTR/APV metrics, checklists, decision rules
-│   └── 06-augmentation-stack.md ← 2026 AI tool upgrades
+│   ├── 06-augmentation-stack.md ← 2026 AI tool upgrades
+│   └── 07-longform-master-prompt-registry.md ← the 10 format master-prompt registry + how the team accesses them
 │
 ├── prompts/                   ← prompts split per step for direct copy-paste
 │   ├── step1-niche-selection.md
